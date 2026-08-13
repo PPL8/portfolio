@@ -209,7 +209,6 @@
       gap: 8px;
     }
 
-    /* 이력 및 경력 리스트 */
     .activity-list {
       list-style: none;
       display: flex;
@@ -322,13 +321,11 @@
       line-height: 1.3;
     }
 
-    /* 📌 커뮤니케이션 원형 그래프 그라데이션 및 네온 효과 */
     .circle-chart.communication {
       background: conic-gradient(#c084fc 0%, #38bdf8 var(--p), rgba(255, 255, 255, 0.08) 0);
       box-shadow: 0 0 16px rgba(192, 132, 252, 0.35);
     }
 
-    /* 일반 스킬 원형 그래프 (단색 하늘색) */
     .circle-chart.standard {
       background: conic-gradient(#38bdf8 var(--p), rgba(255, 255, 255, 0.08) 0);
     }
@@ -578,12 +575,12 @@
           </div>
         </div>
 
-        <!-- 📌 Skills 카드 (사각 박스 제거, Communication 원형 그라데이션 적용) -->
+        <!-- Skills 카드 -->
         <div class="about-card">
           <h3>🛠️ Skills</h3>
           <div class="skills-circle-grid">
             
-            <!-- 📌 커뮤니케이션 (사각 박스 없이 원형 그래프에만 보라-핑크 그라데이션) -->
+            <!-- 커뮤니케이션 -->
             <div class="skill-circle-item">
               <div class="circle-chart communication" style="--p: 95%;">
                 <span class="circle-percent" style="color: #c084fc;">95%</span>
@@ -659,42 +656,45 @@
   </footer>
 
   <script>
+    // 📌 X 링크 통일: https://x.com/PPSG87125194 적용
+    const unifiedXUrl = "https://x.com/PPSG87125194";
+
     const artList = [
       {
         title: "던파 일러스트",
-        imagePath: "./투명화/26.04.09 완 로고X .png ",
+        imagePath: "./투명화/26.04.09 완 로고X .png",
         pixivUrl: "https://www.pixiv.net/artworks/143822399",
-        xUrl: "https://x.com/username/status/123456789"
+        xUrl: unifiedXUrl
       },
       {
         title: "산나비 - 송소령",
         imagePath: "./투명화/144633209_p0_master1200.jpg",
         pixivUrl: "https://www.pixiv.net/artworks/144633209",
-        xUrl: "https://x.com/username/status/123456789"
+        xUrl: unifiedXUrl
       },
       {
         title: "PUKEY GODDESS SHOT TRICK",
         imagePath: "./투명화/26.05.03.png",
         pixivUrl: "https://www.pixiv.net/artworks/145161974",
-        xUrl: "https://x.com"
+        xUrl: unifiedXUrl
       },
       {
         title: "하나코 나나",
         imagePath: "./투명화/일러스트.png",
         pixivUrl: "https://www.pixiv.net/artworks/145533224",
-        xUrl: "https://x.com"
+        xUrl: unifiedXUrl
       },
       {
         title: "이터널 리턴 - 데비 & 마를렌",
         imagePath: "./투명화/147151660_p0_master1200.jpg",
         pixivUrl: "https://www.pixiv.net/artworks/147151660",
-        xUrl: "https://x.com"
+        xUrl: unifiedXUrl
       },
       {
         title: "이터널 리턴 - 데비 & 마를렌",
         imagePath: "./투명화/26.06.05.png",
         pixivUrl: "https://www.pixiv.net/artworks/147334778",
-        xUrl: "https://x.com"
+        xUrl: unifiedXUrl
       }
     ];
 
