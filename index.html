@@ -8,374 +8,429 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
+    /* 📌 1. 풀페이지 스크롤 핵심 스타일 (CSS Scroll Snap) */
     html {
       scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      height: 100%;
+      overflow-y: scroll;
     }
 
     body {
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-      background: #0d0e12;
-      background-image: radial-gradient(circle at 50% 0%, #1a1c24 0%, #0d0e12 70%);
+      background: #080c14;
+      background-image: radial-gradient(circle at 50% 0%, #111a2e 0%, #080c14 70%);
       color: #f1f3f5;
+      height: 100%;
+    }
+
+    /* 📌 2. 공통 풀페이지 섹션 설정 */
+    .snap-section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
       min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
       padding: 60px 20px;
     }
 
-    /* 상단 프로필 헤더 */
-    header {
-      text-align: center;
-      margin-bottom: 40px;
+    /* 등장 애니메이션 */
+    .reveal-content {
+      opacity: 0;
+      transform: translateY(40px) scale(0.96);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .snap-section.active .reveal-content {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* 📌 [섹션 1] 히어로 메인 배너 레이아웃 */
+    .hero-banner {
+      background: url('./투명화/26.07.23.png') center center / cover no-repeat;
+    }
+
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 12, 20, 0.88) 0%,
+        rgba(8, 12, 20, 0.6) 45%,
+        rgba(8, 12, 20, 0.2) 80%,
+        rgba(8, 12, 20, 0.4) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+    }
+
+    /* 좌측 소개문구 (직전 위치로 되돌림) */
+    .hero-left {
+      max-width: 580px;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .profile-badge {
       display: inline-block;
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #a5b4fc;
-      background: rgba(165, 180, 252, 0.1);
-      border: 1px solid rgba(165, 180, 252, 0.2);
-      padding: 6px 14px;
+      letter-spacing: 2px;
+      color: #7dd3fc;
+      background: rgba(125, 211, 252, 0.15);
+      border: 1px solid rgba(125, 211, 252, 0.3);
+      padding: 6px 18px;
       border-radius: 20px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    header h1 {
-      font-size: 2.5rem;
+    .hero-left h1 {
+      font-size: 2.8rem;
       font-weight: 800;
       letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+      line-height: 1.35;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+      background: linear-gradient(135deg, #ffffff 30%, #7dd3fc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
 
-    header .bio {
-      max-width: 600px;
-      margin: 0 auto 24px;
-      line-height: 1.6;
-      color: #9ca3af;
-      font-size: 1rem;
+    .hero-left .bio {
+      line-height: 1.7;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
     }
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    /* 📌 바로가기 탭 바 (은은한 유리질감 반투명 스타일 적용) */
+    .hero-bottom-nav {
+      position: absolute;
+      bottom: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
     }
 
-    .social-btn {
+    .tab-container-inline {
       display: inline-flex;
-      align-items: center;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: #e5e7eb;
-      background: #161821;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .social-btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.25);
-      color: #fff;
-    }
-
-    /* 상단 고정 탭 메뉴 */
-    .tab-wrapper {
-      position: sticky;
-      top: 20px;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 60px;
-    }
-    
-    .tab-container {
-      display: flex;
-      gap: 8px;
-      background: rgba(22, 24, 33, 0.85);
-      backdrop-filter: blur(12px);
-      padding: 6px;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.55); /* 반투명 배경 */
+      backdrop-filter: blur(18px); /* 글래스모피즘 블러 효과 */
+      -webkit-backdrop-filter: blur(18px);
+      padding: 6px 10px;
       border-radius: 40px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(125, 211, 252, 0.22);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      flex-wrap: nowrap;
     }
 
     .tab-btn {
       background: transparent;
-      color: #9ca3af;
+      color: #cbd5e1;
       border: none;
-      padding: 10px 24px;
+      padding: 8px 18px;
       border-radius: 30px;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
       transition: all 0.25s ease;
+      white-space: nowrap;
     }
 
-    .tab-btn:hover { color: #ffffff; }
+    .tab-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
 
     .tab-btn.active {
-      background: #ffffff;
-      color: #0d0e12;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+      background: #38bdf8;
+      color: #080c14;
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.4);
     }
 
-    /* 공통 섹션 레이아웃 */
-    .portfolio-section {
-      max-width: 1200px;
-      margin: 0 auto 100px;
-      scroll-margin-top: 100px;
+    /* 📌 오른쪽 세로 배열 SNS 링크 영역 */
+    .hero-right-social {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 200px;
     }
 
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 28px;
+    .social-btn-vertical {
       display: flex;
       align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 12px;
+      gap: 12px;
+      padding: 12px 20px;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #f8fafc;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
 
-    /* About Me 섹션 레이아웃 */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 32px;
+    .social-btn-vertical svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
     }
 
-    @media (max-width: 868px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
+    .social-btn-vertical:hover {
+      transform: translateX(-6px);
+      border-color: #38bdf8;
+      background: rgba(15, 23, 42, 0.95);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
     }
 
-    .about-profile-card {
-      background: #161821;
-      border-radius: 20px;
-      padding: 32px 24px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      text-align: center;
+    .social-btn-vertical.crepe-btn {
+      background: rgba(2, 132, 199, 0.85);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .social-btn-vertical.crepe-btn:hover {
+      background: #0284c7;
+      box-shadow: 0 6px 24px rgba(2, 132, 199, 0.45);
+    }
+
+    /* 스크롤 유도 화살표 */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: #94a3b8;
+      font-size: 0.75rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 4px;
+      animation: bounce 2s infinite;
     }
 
-    .profile-img-box {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      overflow: hidden;
-      margin-bottom: 20px;
-      border: 3px solid rgba(165, 180, 252, 0.3);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -6px); }
+      60% { transform: translate(-50%, -3px); }
     }
 
-    .profile-img-box img {
+    /* 📌 공통 타이틀 스타일 */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      padding-bottom: 12px;
+      color: #f8fafc;
+    }
+
+    /* 📌 [페이지 2: About Me - 1번 이미지 영역] */
+    .about-top-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
-    .about-details {
+    .about-right-col {
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
 
     .about-card {
-      background: #161821;
+      background: #0f172a;
       border-radius: 20px;
       padding: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .about-card h3 {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #a5b4fc;
-      margin-bottom: 20px;
+      color: #38bdf8;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .activity-list {
-      list-style: none;
+    .about-profile-card {
+      background: #0f172a;
+      border-radius: 20px;
+      padding: 36px 24px;
+      border: 1px solid rgba(56, 189, 248, 0.12);
+      text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
 
+    .profile-img-box {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 3px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
+    }
+
+    .profile-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    .intro-box { line-height: 1.7; color: #cbd5e1; font-size: 1rem; }
+    .intro-box p { margin-bottom: 10px; }
+    .intro-box p:last-child { margin-bottom: 0; }
+
+    /* 스킬 막대 그래프 */
+    .skill-bar-list { display: flex; flex-direction: column; gap: 16px; }
+    .skill-bar-item { display: flex; flex-direction: column; gap: 6px; }
+    .skill-info { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; color: #e2e8f0; }
+    .skill-percent { color: #38bdf8; font-weight: 700; }
+    .skill-track { width: 100%; height: 10px; background: rgba(255, 255, 255, 0.06); border-radius: 10px; overflow: hidden; }
+    .skill-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%); }
+
+    /* 📌 [페이지 3: Activities & Class - 2번 이미지 영역] */
+    .about-bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .activity-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
     .activity-item {
       position: relative;
       padding-left: 20px;
       line-height: 1.5;
-      color: #e5e7eb;
+      color: #e2e8f0;
       font-size: 0.95rem;
     }
-
     .activity-item::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 9px;
-      width: 6px;
-      height: 6px;
+      left: 0; top: 9px;
+      width: 6px; height: 6px;
       background-color: #38bdf8;
       border-radius: 50%;
+      box-shadow: 0 0 8px #38bdf8;
     }
 
-    .class-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .class-list { display: flex; flex-direction: column; gap: 14px; }
+    .class-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .class-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .class-name { font-weight: 600; color: #f1f5f9; font-size: 0.95rem; }
+    .class-date { font-size: 0.85rem; color: #94a3b8; }
+
+    @media (max-width: 868px) {
+      .hero-container { flex-direction: column; align-items: flex-start; }
+      .hero-right-social { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .social-btn-vertical:hover { transform: translateY(-3px); }
+      .about-top-grid, .about-bottom-grid { grid-template-columns: 1fr; }
+      .hero-left h1 { font-size: 2.2rem; }
+      .snap-section { height: auto; min-height: 100vh; padding: 80px 20px 40px; }
+      html { scroll-snap-type: none; }
+      .hero-bottom-nav { position: relative; bottom: auto; left: auto; transform: none; margin-top: 24px; }
     }
 
-    .class-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .class-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .class-name {
-      font-weight: 600;
-      color: #f3f4f6;
-      font-size: 0.95rem;
-    }
-
-    .class-date {
-      font-size: 0.85rem;
-      color: #9ca3af;
-    }
-
-    /* 원형 그래프 Skills 스타일 */
-    .skills-circle-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 20px;
-      justify-items: center;
-      margin-top: 10px;
-    }
-
-    .skill-circle-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      text-align: center;
-    }
-
-    .circle-chart {
-      position: relative;
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-    }
-
-    .circle-chart:hover {
-      transform: scale(1.05);
-    }
-
-    .circle-chart::after {
-      content: "";
-      position: absolute;
-      width: 64px;
-      height: 64px;
-      background: #161821;
-      border-radius: 50%;
-    }
-
-    .circle-percent {
-      position: relative;
-      z-index: 10;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #f3f4f6;
-    }
-
-    .skill-circle-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #cbd5e1;
-      line-height: 1.3;
-    }
-
-    .circle-chart.communication {
-      background: conic-gradient(#c084fc 0%, #38bdf8 var(--p), rgba(255, 255, 255, 0.08) 0);
-      box-shadow: 0 0 16px rgba(192, 132, 252, 0.35);
-    }
-
-    .circle-chart.standard {
-      background: conic-gradient(#38bdf8 var(--p), rgba(255, 255, 255, 0.08) 0);
-    }
-
-    /* 갤러리 그리드 레이아웃 */
+    /* 📌 [섹션 4 & 5] 갤러리 그리드 레이아웃 */
     .gallery-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    /* 카드 공통 스타일 */
+    @media (max-width: 900px) {
+      .gallery-container { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .more-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
+      background: #0f172a;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .more-btn svg { width: 16px; height: 16px; }
+    .more-btn:hover {
+      background: #1e293b;
+      border-color: #38bdf8;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* 카드 스타일 */
     .card {
       display: block;
-      background: #161821;
-      border-radius: 16px;
+      background: #0f172a;
+      border-radius: 14px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                  box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-                  border-color 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
-    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); }
+    .card.art-card:hover { border-color: rgba(56, 189, 248, 0.5); }
+    .card.video-card:hover { border-color: rgba(248, 113, 113, 0.5); }
 
-    .card.art-card:hover {
-      border-color: rgba(96, 165, 250, 0.4);
-      box-shadow: 0 12px 28px rgba(96, 165, 250, 0.15);
-    }
-
-    .card.video-card:hover {
-      border-color: rgba(248, 113, 113, 0.4);
-      box-shadow: 0 12px 28px rgba(248, 113, 113, 0.15);
-    }
-
-    .card-main-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
+    .card-main-link { display: block; text-decoration: none; color: inherit; }
 
     .media-box {
       position: relative;
       width: 100%;
-      height: 220px;
+      height: 160px;
       overflow: hidden;
-      background-color: #050507;
+      background-color: #030712;
     }
 
     .media-box img {
@@ -383,269 +438,251 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease, opacity 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
     .card:hover .media-box img { transform: scale(1.06); }
-    .video-card:hover .media-box img { opacity: 0.85; }
 
     .play-btn {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 52px; height: 36px;
+      width: 44px; height: 30px;
       background-color: rgba(239, 68, 68, 0.9);
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .play-btn::before {
       content: "";
       border-style: solid;
-      border-width: 7px 0 7px 12px;
+      border-width: 6px 0 6px 10px;
       border-color: transparent transparent transparent #ffffff;
     }
 
-    .card:hover .play-btn {
-      background-color: #ef4444;
-      transform: translate(-50%, -50%) scale(1.12);
-    }
+    .card .info { padding: 14px 16px 10px; }
+    .card .title { font-size: 0.95rem; font-weight: 600; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .card .info { padding: 20px 20px 12px; }
-    .card .title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #f3f4f6;
-      line-height: 1.4;
-    }
-
-    .sub-link-box { padding: 0 20px 16px; }
+    .sub-link-box { padding: 0 16px 12px; }
 
     .x-sub-link {
       display: inline-flex;
       align-items: center;
-      font-size: 0.8rem;
+      gap: 6px;
+      font-size: 0.75rem;
       font-weight: 600;
       color: #38bdf8;
       text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.15);
-      transition: all 0.2s ease;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
     }
 
-    .x-sub-link:hover {
-      background: rgba(56, 189, 248, 0.2);
-      color: #ffffff;
-    }
+    .x-sub-link svg { width: 12px; height: 12px; fill: currentColor; }
 
     .youtube-text {
-      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
       font-weight: 500;
       color: #f87171;
     }
 
-    /* 하단 푸터 */
-    .footer-section {
-      max-width: 1200px;
-      margin: 100px auto 0;
-      padding-top: 60px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-      scroll-margin-top: 100px;
-    }
+    .youtube-text svg { width: 12px; height: 12px; fill: currentColor; }
 
-    .footer-content h2 {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-    }
-
-    .footer-content p {
-      color: #9ca3af;
-      margin-bottom: 20px;
-    }
+    /* 📌 [섹션 6] 푸터 섹션 */
+    .footer-section { text-align: center; }
+    .footer-content h2 { font-size: 2rem; margin-bottom: 12px; }
+    .footer-content p { color: #94a3b8; margin-bottom: 24px; }
 
     .crepe-link {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-size: 1.1rem;
       font-weight: 700;
       color: #ffffff;
       text-decoration: none;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%);
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
       border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
       transition: all 0.2s ease;
     }
 
-    .crepe-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
-    }
+    .crepe-link svg { width: 20px; height: 20px; fill: currentColor; }
+    .crepe-link:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(56, 189, 248, 0.55); }
 
-    .copyright {
-      margin-top: 60px;
-      color: #6b7280;
-      font-size: 0.8rem;
-    }
-
-    .copyright .notice {
-      font-size: 0.75rem;
-      margin-top: 4px;
-      color: #4b5563;
-    }
+    .copyright { margin-top: 60px; color: #64748b; font-size: 0.8rem; }
+    .copyright .notice { font-size: 0.75rem; margin-top: 4px; color: #475569; }
   </style>
 </head>
 <body>
 
-  <!-- 상단 프로필 헤더 -->
-  <header>
-    <div class="profile-badge">CREATIVE PORTFOLIO</div>
-    <h1>이야기와 분위기를 담아내는 크리에이터</h1>
-    <p class="bio">일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.</p>
-    
-    <div class="social-links">
-      <a href="https://x.com/PPSG87125194" target="_blank" rel="noopener noreferrer" class="social-btn">X (Twitter)</a>
-      <a href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="social-btn">Pixiv</a>
-      <a href="https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA" target="_blank" rel="noopener noreferrer" class="social-btn">YouTube</a>
-      <a href="https://crepe.cm/ko/@PPL8" target="_blank" rel="noopener noreferrer" class="social-btn" style="background: #6366f1; color: #ffffff; border: none;">🥞 crepe 신청하기 ↗</a>
-    </div>
-  </header>
-
-  <!-- 상단 고정 탭 메뉴 -->
-  <div class="tab-wrapper">
-    <div class="tab-container">
-      <button class="tab-btn active" onclick="scrollToSection('aboutSection')">✨ About Me</button>
-      <button class="tab-btn" onclick="scrollToSection('artSection')">🎨 Image Gallery</button>
-      <button class="tab-btn" onclick="scrollToSection('videoSection')">🎬 Video Gallery</button>
-    </div>
-  </div>
-
-  <!-- 📌 1. About Me 섹션 -->
-  <section class="portfolio-section" id="aboutSection">
-    <h2 class="section-title">✨ About Me</h2>
-    
-    <div class="about-grid">
-      <!-- 좌측: 프로필 카드 -->
-      <div class="about-profile-card">
-        <div class="profile-img-box">
-          <img src="./투명화/26.06.05.png" alt="Profile Image">
-        </div>
-        <h3 style="color: #fff; margin-bottom: 8px;">Creator Profile</h3>
-        <p style="color: #9ca3af; font-size: 0.9rem; line-height: 1.5;">
-          일러스트레이션 & 영상 커미션 및 외주 작업을 진행합니다.
-        </p>
+  <!-- 📌 [페이지 1] 메인 히어로 배너 -->
+  <section class="snap-section hero-banner active" id="heroSection">
+    <div class="hero-container reveal-content">
+      
+      <!-- 좌측: 소개문구 (직전 위치로 되돌림) -->
+      <div class="hero-left">
+        <div class="profile-badge">CREATIVE PORTFOLIO</div>
+        <h1>이야기와 분위기를<br>담아내는 크리에이터</h1>
+        <p class="bio">일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.</p>
       </div>
 
-      <!-- 우측: Activities, Class, Skills -->
-      <div class="about-details">
-        
-        <!-- Major Activities 카드 -->
+      <!-- 우측: 세로 배열 SNS & 크레페 링크 -->
+      <div class="hero-right-social">
+        <a href="https://x.com/PPSG87125194" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X (Twitter)
+        </a>
+        <a href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
+          <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0096FA"/><path d="M12.26 6.8c1.88 0 3.34 1.32 3.34 3.25 0 1.96-1.46 3.28-3.34 3.28h-2.31v3.87H7.6V6.8h4.66zm-2.31 4.58h2.08c.88 0 1.52-.52 1.52-1.33 0-.82-.64-1.32-1.52-1.32h-2.08v2.65z" fill="#FFFFFF"/></svg>
+          Pixiv
+        </a>
+        <a href="https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a href="https://crepe.cm/ko/@PPL8" target="_blank" rel="noopener noreferrer" class="social-btn-vertical crepe-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          crepe 신청하기 ↗
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 📌 배너 중앙 하단 바로가기 탭 바 (반투명 스타일 적용) -->
+    <div class="hero-bottom-nav">
+      <div class="tab-container-inline">
+        <button class="tab-btn active" onclick="scrollToSection('heroSection')">🏠 Home</button>
+        <button class="tab-btn" onclick="scrollToSection('aboutSection')">✨ Profile & Skills</button>
+        <button class="tab-btn" onclick="scrollToSection('activitySection')">🎬 Activity & Class</button>
+        <button class="tab-btn" onclick="scrollToSection('artSection')">🎨 Image</button>
+        <button class="tab-btn" onclick="scrollToSection('videoSection')">🎬 Video</button>
+        <button class="tab-btn" onclick="scrollToSection('contactSection')">🤝 Contact</button>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      ▼
+    </div>
+  </section>
+
+  <!-- 📌 [페이지 2] About Me - 1 (1번 이미지 영역: Profile, Introduce, Skills) -->
+  <section class="snap-section" id="aboutSection">
+    <div class="reveal-content">
+      <h2 class="section-title">✨ Profile & Skills</h2>
+      
+      <div class="about-top-grid">
+        <div class="about-profile-card">
+          <div class="profile-img-box">
+            <img src="./투명화/26.06.05.png" alt="Profile Image">
+          </div>
+          <h3 style="color: #fff; margin-bottom: 8px;">Creator Profile</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5;">일러스트 & 영상 커미션 및 외주 작업을 진행합니다.</p>
+        </div>
+
+        <div class="about-right-col">
+          <div class="about-card intro-box">
+            <h3>💬 Introduce</h3>
+            <p>안녕하세요! 매력적인 캐릭터와 매력적인 분위기를 그리는 창작자입니다.</p>
+            <p>일러스트 제작부터 영상 편집 및 모션 그래픽 연출까지 폭넓게 작업하고 있습니다. 언제든 편하게 문의해 주세요!</p>
+          </div>
+
+          <div class="about-card">
+            <h3>🛠️ Skills</h3>
+            <div class="skill-bar-list">
+              <div class="skill-bar-item">
+                <div class="skill-info"><span>Communication</span><span class="skill-percent">95%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width: 95%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info"><span>Clip Studio</span><span class="skill-percent">95%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width: 95%;"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-info"><span>Photoshop / After Effects / Premiere</span><span class="skill-percent">85%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width: 85%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📌 [페이지 3] About Me - 2 (2번 이미지 영역: Major Activities, Class) -->
+  <section class="snap-section" id="activitySection">
+    <div class="reveal-content">
+      <h2 class="section-title">🎬 Activities & Experience</h2>
+      
+      <div class="about-bottom-grid">
         <div class="about-card">
           <h3>🎬 Major Activities</h3>
           <ul class="activity-list">
             <li class="activity-item">30만 유튜버 '지존조세' 엔딩 애니메이션 제작</li>
             <li class="activity-item">게임 '데드 라인 디베이드' 일러스트 참여</li>
             <li class="activity-item">SOOP 방송인 '밍꾸냥' 배경 일러스트 제작</li>
-            <li class="activity-item">국가유산청 '서라벌 천년 시간여행(신라왕경 디지털복원)' UI 제작 참여</li>
+            <li class="activity-item">국가유산청 디지털복원 UI 제작 참여</li>
           </ul>
         </div>
 
-        <!-- Class 카드 -->
         <div class="about-card">
           <h3>🎓 Class</h3>
           <div class="class-list">
-            <div class="class-item">
-              <span class="class-name">아또리얼 프로 클래스</span>
-              <span class="class-date">2024.05 - 2025.07</span>
-            </div>
-            <div class="class-item">
-              <span class="class-name">네오 아카데미</span>
-              <span class="class-date">2026.01 - 2026.07</span>
-            </div>
-            <div class="class-item">
-              <span class="class-name">이젠 컴퓨터학원</span>
-              <span class="class-date">2026.05 - 2026.11</span>
-            </div>
+            <div class="class-item"><span class="class-name">아또리얼 프로 클래스</span><span class="class-date">2024.05 - 2025.07</span></div>
+            <div class="class-item"><span class="class-name">네오 아카데미</span><span class="class-date">2026.01 - 2026.07</span></div>
+            <div class="class-item"><span class="class-name">이젠 컴퓨터학원</span><span class="class-date">2026.05 - 2026.11</span></div>
           </div>
         </div>
-
-        <!-- Skills 카드 -->
-        <div class="about-card">
-          <h3>🛠️ Skills</h3>
-          <div class="skills-circle-grid">
-            
-            <!-- 커뮤니케이션 -->
-            <div class="skill-circle-item">
-              <div class="circle-chart communication" style="--p: 95%;">
-                <span class="circle-percent" style="color: #c084fc;">95%</span>
-              </div>
-              <span class="skill-circle-label" style="color: #a5b4fc; font-weight: 700;">Communication</span>
-            </div>
-
-            <!-- Clip Studio -->
-            <div class="skill-circle-item">
-              <div class="circle-chart standard" style="--p: 95%;">
-                <span class="circle-percent">95%</span>
-              </div>
-              <span class="skill-circle-label">Clip Studio</span>
-            </div>
-
-            <!-- Photoshop -->
-            <div class="skill-circle-item">
-              <div class="circle-chart standard" style="--p: 90%;">
-                <span class="circle-percent">90%</span>
-              </div>
-              <span class="skill-circle-label">Photoshop</span>
-            </div>
-
-            <!-- After Effects -->
-            <div class="skill-circle-item">
-              <div class="circle-chart standard" style="--p: 80%;">
-                <span class="circle-percent">80%</span>
-              </div>
-              <span class="skill-circle-label">After Effects</span>
-            </div>
-
-            <!-- Premiere Pro -->
-            <div class="skill-circle-item">
-              <div class="circle-chart standard" style="--p: 80%;">
-                <span class="circle-percent">80%</span>
-              </div>
-              <span class="skill-circle-label">Premiere Pro</span>
-            </div>
-
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- 📌 2. 이미지 갤러리 섹션 -->
-  <section class="portfolio-section" id="artSection">
-    <h2 class="section-title">🎨 Image Gallery</h2>
-    <div class="gallery-container" id="artGallery"></div>
+  <!-- 📌 [페이지 4] 이미지 갤러리 섹션 -->
+  <section class="snap-section" id="artSection">
+    <div class="reveal-content">
+      <h2 class="section-title">🎨 Image Gallery</h2>
+      <div class="gallery-container" id="artGallery"></div>
+      
+      <div class="more-btn-wrapper">
+        <a href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="more-btn">
+          <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0096FA"/><path d="M12.26 6.8c1.88 0 3.34 1.32 3.34 3.25 0 1.96-1.46 3.28-3.34 3.28h-2.31v3.87H7.6V6.8h4.66zm-2.31 4.58h2.08c.88 0 1.52-.52 1.52-1.33 0-.82-.64-1.32-1.52-1.32h-2.08v2.65z" fill="#FFFFFF"/></svg>
+          Pixiv에서 더 많은 작품 보기 ↗
+        </a>
+      </div>
+    </div>
   </section>
 
-  <!-- 📌 3. 비디오 갤러리 섹션 -->
-  <section class="portfolio-section" id="videoSection">
-    <h2 class="section-title">🎬 Video Gallery</h2>
-    <div class="gallery-container" id="videoGallery"></div>
+  <!-- 📌 [페이지 5] 비디오 갤러리 섹션 -->
+  <section class="snap-section" id="videoSection">
+    <div class="reveal-content">
+      <h2 class="section-title">🎬 Video Gallery</h2>
+      <div class="gallery-container" id="videoGallery"></div>
+      
+      <div class="more-btn-wrapper">
+        <a href="https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA" target="_blank" rel="noopener noreferrer" class="more-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube 채널에서 영상 더 보기 ↗
+        </a>
+      </div>
+    </div>
   </section>
 
-  <!-- 하단 푸터 섹션 -->
-  <footer class="footer-section" id="contactSection">
-    <div class="footer-content">
+  <!-- 📌 [페이지 6] 하단 푸터 섹션 -->
+  <section class="snap-section footer-section" id="contactSection">
+    <div class="reveal-content footer-content">
       <h2>Let's Work Together! 🤝</h2>
       <p>작업 의뢰 및 커미션 신청은 크레페(crepe) 페이지를 통해 진행하고 있습니다.</p>
       <a href="https://crepe.cm/ko/@PPL8" target="_blank" rel="noopener noreferrer" class="crepe-link">
-        🥞 크레페에서 의뢰 신청하기 ↗
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        크레페에서 의뢰 신청하기 ↗
       </a>
       
       <div class="copyright">
@@ -653,156 +690,95 @@
         <p class="notice">All images and videos contained on this site are protected by copyright.</p>
       </div>
     </div>
-  </footer>
+  </section>
 
   <script>
-    // 📌 X 링크 통일: https://x.com/PPSG87125194 적용
     const unifiedXUrl = "https://x.com/PPSG87125194";
 
     const artList = [
-      {
-        title: "던파 일러스트",
-        imagePath: "./투명화/26.04.09 완 로고X .png",
-        pixivUrl: "https://www.pixiv.net/artworks/143822399",
-        xUrl: unifiedXUrl
-      },
-      {
-        title: "산나비 - 송소령",
-        imagePath: "./투명화/144633209_p0_master1200.jpg",
-        pixivUrl: "https://www.pixiv.net/artworks/144633209",
-        xUrl: unifiedXUrl
-      },
-      {
-        title: "PUKEY GODDESS SHOT TRICK",
-        imagePath: "./투명화/26.05.03.png",
-        pixivUrl: "https://www.pixiv.net/artworks/145161974",
-        xUrl: unifiedXUrl
-      },
-      {
-        title: "하나코 나나",
-        imagePath: "./투명화/일러스트.png",
-        pixivUrl: "https://www.pixiv.net/artworks/145533224",
-        xUrl: unifiedXUrl
-      },
-      {
-        title: "이터널 리턴 - 데비 & 마를렌",
-        imagePath: "./투명화/147151660_p0_master1200.jpg",
-        pixivUrl: "https://www.pixiv.net/artworks/147151660",
-        xUrl: unifiedXUrl
-      },
-      {
-        title: "이터널 리턴 - 데비 & 마를렌",
-        imagePath: "./투명화/26.06.05.png",
-        pixivUrl: "https://www.pixiv.net/artworks/147334778",
-        xUrl: unifiedXUrl
-      }
+      { title: "던파 일러스트", imagePath: "./투명화/26.04.09 완 로고X .png", pixivUrl: "https://www.pixiv.net/artworks/143822399", xUrl: unifiedXUrl },
+      { title: "산나비 - 송소령", imagePath: "./투명화/144633209_p0_master1200.jpg", pixivUrl: "https://www.pixiv.net/artworks/144633209", xUrl: unifiedXUrl },
+      { title: "PUKEY GODDESS SHOT TRICK", imagePath: "./투명화/26.05.03.png", pixivUrl: "https://www.pixiv.net/artworks/145161974", xUrl: unifiedXUrl },
+      { title: "하나코 나나", imagePath: "./투명화/일러스트.png", pixivUrl: "https://www.pixiv.net/artworks/145533224", xUrl: unifiedXUrl },
+      { title: "이터널 리턴 - 데비 & 마를렌", imagePath: "./투명화/147151660_p0_master1200.jpg", pixivUrl: "https://www.pixiv.net/artworks/147151660", xUrl: unifiedXUrl },
+      { title: "이터널 리턴 - 데비 & 마를렌", imagePath: "./투명화/26.06.05.png", pixivUrl: "https://www.pixiv.net/artworks/147334778", xUrl: unifiedXUrl },
+      { title: "푸른 하늘과 구름", imagePath: "./투명화/26.07.23.png", pixivUrl: "https://pixiv.net/users/93480186", xUrl: unifiedXUrl }
     ];
 
     const videoList = [
-      {
-        title: "AI활용 브이로그",
-        youtubeId: "e2_TtUY9_OY"
-      },
-      {
-        title: "브이로그 촬영",
-        youtubeId: "SXKLXFxd7AQ"
-      },
-      {
-        title: "교차편집 연습용",
-        youtubeId: "o7AsicCs_f8"
-      },
-      {
-        title: "모션 연습해보기",
-        youtubeId: "ecpvLpdLo8M"
-      },
-      {
-        title: "하나코 나나 - Enermy",
-        youtubeId: "P5U_WQBnWIs"
-      }
+      { title: "AI활용 브이로그", youtubeId: "e2_TtUY9_OY" },
+      { title: "브이로그 촬영", youtubeId: "SXKLXFxd7AQ" },
+      { title: "교차편집 연습용", youtubeId: "o7AsicCs_f8" },
+      { title: "모션 연습해보기", youtubeId: "ecpvLpdLo8M" },
+      { title: "하나코 나나 - Enermy", youtubeId: "P5U_WQBnWIs" }
     ];
 
-    // 1. 이미지 갤러리 출력
+    const xLogoSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
+    const ytLogoSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`;
+
+    // 이미지 갤러리 6개
     const artGallery = document.getElementById('artGallery');
-    artList.slice().reverse().forEach(art => {
+    artList.slice().reverse().slice(0, 6).forEach(art => {
       const card = document.createElement('div');
       card.className = 'card art-card';
-
-      let xButtonHtml = '';
-      if (art.xUrl) {
-        xButtonHtml = `
-          <div class="sub-link-box">
-            <a href="${art.xUrl}" target="_blank" rel="noopener noreferrer" class="x-sub-link">
-              X (Twitter)에서 보기 ↗
-            </a>
-          </div>
-        `;
-      }
-
+      let xBtn = art.xUrl ? `<div class="sub-link-box"><a href="${art.xUrl}" target="_blank" class="x-sub-link">${xLogoSvg} X에서 보기 ↗</a></div>` : '';
       card.innerHTML = `
-        <a href="${art.pixivUrl}" target="_blank" rel="noopener noreferrer" class="card-main-link">
-          <div class="media-box">
-            <img src="${art.imagePath}" alt="${art.title}">
-          </div>
-          <div class="info">
-            <div class="title">${art.title}</div>
-          </div>
-        </a>
-        ${xButtonHtml}
-      `;
+        <a href="${art.pixivUrl}" target="_blank" class="card-main-link">
+          <div class="media-box"><img src="${art.imagePath}" alt="${art.title}"></div>
+          <div class="info"><div class="title">${art.title}</div></div>
+        </a>${xBtn}`;
       artGallery.appendChild(card);
     });
 
-    // 2. 비디오 갤러리 출력
+    // 비디오 갤러리 6개
     const videoGallery = document.getElementById('videoGallery');
-    videoList.slice().reverse().forEach(item => {
+    videoList.slice().reverse().slice(0, 6).forEach(item => {
       const card = document.createElement('a');
       card.className = 'card video-card card-main-link';
       card.href = `https://www.youtube.com/watch?v=${item.youtubeId}`;
       card.target = '_blank';
-      card.rel = 'noopener noreferrer';
-
-      const thumbnailUrl = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
-
       card.innerHTML = `
         <div class="media-box">
-          <img src="${thumbnailUrl}" alt="${item.title}">
+          <img src="https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg" alt="${item.title}">
           <div class="play-btn"></div>
         </div>
         <div class="info">
           <div class="title">${item.title}</div>
-          <div class="youtube-text" style="margin-top: 8px;">YouTube에서 보기 ↗</div>
-        </div>
-      `;
+          <div class="youtube-text" style="margin-top: 6px;">${ytLogoSvg} YouTube에서 보기 ↗</div>
+        </div>`;
       videoGallery.appendChild(card);
     });
 
-    // 3. 스크롤 이동 함수
-    function scrollToSection(sectionId) {
-      const target = document.getElementById(sectionId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+    // 스크롤 이동 함수
+    function scrollToSection(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // 4. 스크롤 활성화 탭 업데이트
-    window.addEventListener('scroll', () => {
-      const buttons = document.querySelectorAll('.tab-btn');
-      const aboutSec = document.getElementById('aboutSection');
-      const artSec = document.getElementById('artSection');
-      const videoSec = document.getElementById('videoSection');
+    // 풀페이지 감지 및 활성화 (IntersectionObserver)
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            
+            // 바로가기 탭 버튼 활성화 상태 업데이트
+            const id = entry.target.id;
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (id === 'heroSection') buttons[0].classList.add('active');
+            else if (id === 'aboutSection') buttons[1].classList.add('active');
+            else if (id === 'activitySection') buttons[2].classList.add('active');
+            else if (id === 'artSection') buttons[3].classList.add('active');
+            else if (id === 'videoSection') buttons[4].classList.add('active');
+            else if (id === 'contactSection') buttons[5].classList.add('active');
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      }, { threshold: 0.5 });
 
-      const artTop = artSec.getBoundingClientRect().top;
-      const videoTop = videoSec.getBoundingClientRect().top;
-
-      buttons.forEach(btn => btn.classList.remove('active'));
-
-      if (videoTop <= 200) {
-        buttons[2].classList.add('active');
-      } else if (artTop <= 200) {
-        buttons[1].classList.add('active');
-      } else {
-        buttons[0].classList.add('active');
-      }
+      document.querySelectorAll(".snap-section").forEach(sec => observer.observe(sec));
     });
   </script>
 </body>
