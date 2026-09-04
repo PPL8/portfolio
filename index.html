@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Creative Portfolio</title>
   
-  <!-- 📌 Font Awesome 6 최신 아이콘 라이브러리 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -72,7 +71,6 @@
       transition: position 0.3s ease, top 0.3s ease, bottom 0.3s ease;
     }
 
-    /* 스크롤이 내려갔을 때 적용되는 상단 고정 클래스 */
     .adaptive-nav.is-fixed {
       position: fixed;
       top: 20px;
@@ -119,10 +117,7 @@
       gap: 8px;
     }
 
-    .tab-btn i {
-      font-size: 0.9rem;
-    }
-
+    .tab-btn i { font-size: 0.9rem; }
     .tab-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
 
     .tab-btn.active {
@@ -131,7 +126,7 @@
       box-shadow: 0 4px 16px rgba(56, 189, 248, 0.4);
     }
 
-    /* 📌 [섹션 1] 히어로 메인 배너 레이아웃 */
+    /* 📌 [섹션 1] 히어로 메인 배너 */
     .hero-banner {
       background: url('./투명화/26.07.23.png') center center / cover no-repeat;
     }
@@ -228,11 +223,7 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
 
-    .social-btn-vertical svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
+    .social-btn-vertical svg { width: 20px; height: 20px; flex-shrink: 0; }
 
     .social-btn-vertical:hover {
       transform: translateX(-6px);
@@ -285,16 +276,15 @@
       color: #f8fafc;
     }
 
-    .section-title i {
-      color: #38bdf8;
-    }
+    .section-title i { color: #38bdf8; }
 
-    /* 📌 [페이지 2: About Me] */
+    /* 📌 [페이지 2: About Me - 이미지:텍스트 4:3 비율 적용] */
     .about-integrated-grid {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 320px 1fr;
       gap: 20px;
       width: 100%;
+      align-items: stretch;
     }
 
     .stagger-box {
@@ -309,7 +299,6 @@
     #aboutSection.active .about-right-grid .stagger-box:nth-child(1) { transition-delay: 0.25s; opacity: 1; transform: translateY(0) scale(1); }
     #aboutSection.active .about-right-grid .stagger-box:nth-child(2) { transition-delay: 0.4s; opacity: 1; transform: translateY(0) scale(1); }
     #aboutSection.active .about-right-grid .stagger-box:nth-child(3) { transition-delay: 0.55s; opacity: 1; transform: translateY(0) scale(1); }
-    #aboutSection.active .about-right-grid .stagger-box:nth-child(4) { transition-delay: 0.7s; opacity: 1; transform: translateY(0) scale(1); }
 
     .about-card {
       background: #0f172a;
@@ -329,51 +318,97 @@
       gap: 8px;
     }
 
+    /* 📌 좌측 프로필 카드: 수직 Flex 구조로 4:3 수직 비율 배분 */
     .about-profile-card {
       background: #0f172a;
       border-radius: 18px;
-      padding: 24px 20px;
+      padding: 20px;
       border: 1px solid rgba(56, 189, 248, 0.12);
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 12px;
+    }
+
+    /* 상단 이미지 영역 (비율 = 4) */
+    .profile-top-area {
+      flex: 4;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100%;
+      width: 100%;
     }
 
-    .profile-img-box {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
+    .profile-img-box-rect {
+      width: 100%;
+      flex: 1;
+      min-height: 220px;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 16px;
-      border: 3px solid rgba(56, 189, 248, 0.4);
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
+      margin-bottom: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      background-color: #030712;
     }
 
-    .profile-img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-img-box-rect img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
+    /* 하단 텍스트(Introduce) 영역 (비율 = 3) */
+    .intro-integrated-box {
+      flex: 3;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+      width: 100%;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .intro-integrated-box h4 {
+      font-size: 0.95rem;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intro-integrated-box p {
+      margin-bottom: 8px;
+    }
+
+    .intro-integrated-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 📌 우측 그리드 비율 배치 (1 : 1 : 2) */
     .about-right-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
     }
 
-    .full-width-card { grid-column: 1 / -1; }
-
-    .intro-box { line-height: 1.6; color: #cbd5e1; font-size: 0.95rem; }
-    .intro-box p { margin-bottom: 6px; }
-    .intro-box p:last-child { margin-bottom: 0; }
+    .grid-ratio-1 { flex: 1; }
+    .grid-ratio-2 { flex: 2; }
 
     @keyframes fillUpSmooth95 { 0% { width: 0%; } 100% { width: 95%; } }
     @keyframes fillUpSmooth85 { 0% { width: 0%; } 100% { width: 85%; } }
 
-    .skill-bar-list { display: flex; flex-direction: column; gap: 10px; }
+    .skill-bar-list { display: flex; flex-direction: column; gap: 8px; }
     .skill-bar-item { display: flex; flex-direction: column; gap: 4px; }
-    .skill-info { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: #e2e8f0; }
+    .skill-info { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; color: #e2e8f0; }
     .skill-percent { color: #38bdf8; font-weight: 700; }
-    .skill-track { width: 100%; height: 7px; background: rgba(255, 255, 255, 0.06); border-radius: 8px; overflow: hidden; }
+    .skill-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 8px; overflow: hidden; }
     
     .skill-fill {
       height: 100%;
@@ -382,14 +417,8 @@
       width: 0%;
     }
 
-    /* Communication 보라색 강조 */
-    .skill-fill.skill-fill-purple {
-      background: linear-gradient(90deg, #a855f7 0%, #c084fc 100%);
-    }
-
-    .skill-info .skill-percent-purple {
-      color: #c084fc;
-    }
+    .skill-fill.skill-fill-purple { background: linear-gradient(90deg, #a855f7 0%, #c084fc 100%); }
+    .skill-info .skill-percent-purple { color: #c084fc; }
 
     #aboutSection.active .skill-fill-95 {
       animation: fillUpSmooth95 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -401,31 +430,32 @@
       animation-delay: 0.45s;
     }
 
-    .activity-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .activity-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .activity-item {
       position: relative;
-      padding-left: 16px;
-      line-height: 1.4;
-      color: #e2e8f0;
-      font-size: 0.88rem;
+      padding-left: 18px;
+      line-height: 1.5;
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
     .activity-item::before {
       content: "";
       position: absolute;
-      left: 0; top: 7px;
-      width: 5px; height: 5px;
+      left: 0; top: 8px;
+      width: 6px; height: 6px;
       background-color: #38bdf8;
       border-radius: 50%;
-      box-shadow: 0 0 6px #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
     }
 
-    .class-list { display: flex; flex-direction: column; gap: 10px; }
-    .class-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .class-list { display: flex; flex-direction: column; gap: 8px; }
+    .class-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
     .class-item:last-child { border-bottom: none; padding-bottom: 0; }
     .class-name { font-weight: 600; color: #f1f5f9; font-size: 0.88rem; }
     .class-date { font-size: 0.8rem; color: #94a3b8; }
 
-    /* 📌 [페이지 3 & 4] 스와이프형 커버플로우 갤러리 스타일 */
+    /* 📌 [페이지 3 & 4] 스와이프형 커버플로우 갤러리 */
     .slider-wrapper {
       position: relative;
       width: 100%;
@@ -470,8 +500,7 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: rgba(15, 23, 42, 0.85);
       border: 1px solid rgba(56, 189, 248, 0.4);
@@ -494,21 +523,19 @@
     .slider-btn.prev { left: 10px; }
     .slider-btn.next { right: 10px; }
 
-    /* 📌 [요청 반영 2번] 모바일 환경 반응형 & 스크롤 스냅 최적화 */
     @media (max-width: 900px) {
       html {
-        scroll-snap-type: y proximity; /* 튕김 방지를 위해 proximity 적용 */
+        scroll-snap-type: y proximity;
         -webkit-overflow-scrolling: touch;
       }
 
       .snap-section {
-        min-height: 100dvh; /* 가변 주소창 대응 */
+        min-height: 100dvh;
         height: auto;
         padding: 90px 20px 60px;
       }
 
       .about-integrated-grid { grid-template-columns: 1fr; }
-      .about-right-grid { grid-template-columns: 1fr; }
       .hero-container { flex-direction: column; align-items: flex-start; }
       .hero-right-social { width: 100%; flex-direction: row; flex-wrap: wrap; }
       .social-btn-vertical:hover { transform: translateY(-3px); }
@@ -520,8 +547,7 @@
 
       .slider-btn {
         display: flex;
-        width: 38px;
-        height: 38px;
+        width: 38px; height: 38px;
         font-size: 0.85rem;
         background: rgba(15, 23, 42, 0.9);
       }
@@ -671,7 +697,6 @@
 </head>
 <body>
 
-  <!-- 📌 [페이지 1] 메인 히어로 배너 -->
   <section class="snap-section hero-banner active" id="heroSection">
     <div class="hero-container reveal-content">
       
@@ -681,14 +706,12 @@
         <p class="bio">일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.</p>
       </div>
 
-      <!-- 📌 오른쪽 SNS 링크 바 -->
       <div class="hero-right-social">
         <a href="https://x.com/PPSG87125194" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           X (Twitter)
         </a>
         <a href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
-          <!-- 선명하게 고친 공식 Pixiv P 로고 -->
           <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0096FA"/><path d="M12.875 6.5H8.25V17.5H10.75V13.25H12.875C15.222 13.25 17.125 11.739 17.125 9.875C17.125 8.011 15.222 6.5 12.875 6.5ZM12.625 11.25H10.75V8.5H12.625C13.868 8.5 14.875 9.116 14.875 9.875C14.875 10.634 13.868 11.25 12.625 11.25Z" fill="#FFFFFF"/></svg>
           Pixiv
         </a>
@@ -704,7 +727,6 @@
 
     </div>
 
-    <!-- 📌 네비게이션 바 (초기: 히어로 하단 / 스크롤 시: 화면 상단 이동) -->
     <div class="adaptive-nav" id="mainNav">
       <div class="tab-container-inline">
         <button class="tab-btn active" onclick="scrollToSection('heroSection')"><i class="fa-solid fa-house"></i> Home</button>
@@ -721,28 +743,32 @@
     </div>
   </section>
 
-  <!-- 📌 [페이지 2] About Me -->
   <section class="snap-section" id="aboutSection">
     <div class="reveal-content">
       <h2 class="section-title"><i class="fa-solid fa-user"></i> About Me</h2>
       
       <div class="about-integrated-grid">
         <div class="about-profile-card stagger-box">
-          <div class="profile-img-box">
-            <img src="./투명화/26.06.05.png" alt="Profile Image">
+          
+          <div class="profile-top-area">
+            <div class="profile-img-box-rect">
+              <img src="./투명화/프로필.png" alt="Profile Image">
+            </div>
+            <h3 style="color: #fff; margin-bottom: 2px;">Creator Profile</h3>
+            <p style="color: #94a3b8; font-size: 0.8rem;">일러스트 & 영상 커미션 및 외주 작업 진행</p>
           </div>
-          <h3 style="color: #fff; margin-bottom: 8px;">Creator Profile</h3>
-          <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">일러스트 & 영상 커미션 및 외주 작업을 진행합니다.</p>
-        </div>
 
-        <div class="about-right-grid">
-          <div class="about-card intro-box full-width-card stagger-box">
-            <h3><i class="fa-solid fa-comment-dots" style="color: #38bdf8;"></i> Introduce</h3>
+          <div class="intro-integrated-box">
+            <h4><i class="fa-solid fa-comment-dots"></i> Introduce</h4>
             <p>안녕하세요! 매력적인 캐릭터와 분위기를 그리는 창작자입니다.</p>
             <p>일러스트 제작부터 영상 편집 및 모션 그래픽 연출까지 폭넓게 작업하고 있습니다. 언제든 편하게 문의해 주세요!</p>
           </div>
 
-          <div class="about-card full-width-card stagger-box">
+        </div>
+
+        <div class="about-right-grid">
+          
+          <div class="about-card grid-ratio-1 stagger-box">
             <h3><i class="fa-solid fa-wrench" style="color: #38bdf8;"></i> Skills</h3>
             <div class="skill-bar-list">
               <div class="skill-bar-item">
@@ -768,7 +794,16 @@
             </div>
           </div>
 
-          <div class="about-card stagger-box">
+          <div class="about-card grid-ratio-1 stagger-box">
+            <h3><i class="fa-solid fa-graduation-cap" style="color: #38bdf8;"></i> Class</h3>
+            <div class="class-list">
+              <div class="class-item"><span class="class-name">아또리얼 프로 클래스</span><span class="class-date">2024.05 - 2025.07</span></div>
+              <div class="class-item"><span class="class-name">네오 아카데미</span><span class="class-date">2026.01 - 2026.07</span></div>
+              <div class="class-item"><span class="class-name">이젠 컴퓨터학원</span><span class="class-date">2026.05 - 2026.11</span></div>
+            </div>
+          </div>
+
+          <div class="about-card grid-ratio-2 stagger-box">
             <h3><i class="fa-solid fa-clapperboard" style="color: #38bdf8;"></i> Major Activities</h3>
             <ul class="activity-list">
               <li class="activity-item">30만 유튜버 '지존조세' 엔딩 애니메이션 제작</li>
@@ -778,20 +813,11 @@
             </ul>
           </div>
 
-          <div class="about-card stagger-box">
-            <h3><i class="fa-solid fa-graduation-cap" style="color: #38bdf8;"></i> Class</h3>
-            <div class="class-list">
-              <div class="class-item"><span class="class-name">아또리얼 프로 클래스</span><span class="class-date">2024.05 - 2025.07</span></div>
-              <div class="class-item"><span class="class-name">네오 아카데미</span><span class="class-date">2026.01 - 2026.07</span></div>
-              <div class="class-item"><span class="class-name">이젠 컴퓨터학원</span><span class="class-date">2026.05 - 2026.11</span></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 📌 [페이지 3] 이미지 갤러리 -->
   <section class="snap-section" id="artSection">
     <div class="reveal-content">
       <h2 class="section-title"><i class="fa-solid fa-palette"></i> Image Gallery</h2>
@@ -804,7 +830,6 @@
 
       <div class="more-btn-wrapper">
         <a href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="more-btn">
-          <!-- 선명하게 고친 공식 Pixiv P 로고 -->
           <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0096FA"/><path d="M12.875 6.5H8.25V17.5H10.75V13.25H12.875C15.222 13.25 17.125 11.739 17.125 9.875C17.125 8.011 15.222 6.5 12.875 6.5ZM12.625 11.25H10.75V8.5H12.625C13.868 8.5 14.875 9.116 14.875 9.875C14.875 10.634 13.868 11.25 12.625 11.25Z" fill="#FFFFFF"/></svg>
           Pixiv에서 더 많은 작품 보기 ↗
         </a>
@@ -812,7 +837,6 @@
     </div>
   </section>
 
-  <!-- 📌 [페이지 4] 비디오 갤러리 -->
   <section class="snap-section" id="videoSection">
     <div class="reveal-content">
       <h2 class="section-title"><i class="fa-solid fa-film"></i> Video Gallery</h2>
@@ -832,7 +856,6 @@
     </div>
   </section>
 
-  <!-- 📌 [페이지 5] 하단 푸터 섹션 -->
   <section class="snap-section footer-section" id="contactSection">
     <div class="reveal-content footer-content">
       <h2>Let's Work Together! <i class="fa-solid fa-paper-plane"></i></h2>
@@ -866,9 +889,10 @@
     const videoList = [
       { title: "AI활용 브이로그", youtubeId: "e2_TtUY9_OY" },
       { title: "브이로그 촬영", youtubeId: "SXKLXFxd7AQ" },
-      { title: "교차편집 연습용", youtubeId: "o7AsicCs_f8" },
-      { title: "모션 연습해보기", youtubeId: "ecpvLpdLo8M" },
-      { title: "하나코 나나 - Enermy", youtubeId: "P5U_WQBnWIs" }
+      { title: "교차편집", youtubeId: "o7AsicCs_f8" },
+      { title: "쇼츠 애니메이션", youtubeId: "ecpvLpdLo8M" },
+      { title: "하나코 나나 - Enermy", youtubeId: "P5U_WQBnWIs" },
+      { title: "(연습)플레이스테이션 광고", youtubeId: "gk-4oLWbBkI" }
     ];
 
     const xLogoSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
@@ -1019,7 +1043,6 @@
       const mainNav = document.getElementById('mainNav');
       const heroSection = document.getElementById('heroSection');
 
-      // 📌 스크롤 감지하여 네비게이션 바 위치 변경 (하단 ➔ 상단)
       window.addEventListener('scroll', () => {
         const heroBottom = heroSection.getBoundingClientRect().bottom;
         if (heroBottom <= 120) {
