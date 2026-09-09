@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Creative Portfolio</title>
   
+  <!-- 📌 Font Awesome 6 최신 아이콘 라이브러리 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -278,7 +279,7 @@
 
     .section-title i { color: #38bdf8; }
 
-    /* 📌 [페이지 2: About Me - 이미지:텍스트 4:3 비율 적용] */
+    /* 📌 [페이지 2: About Me] */
     .about-integrated-grid {
       display: grid;
       grid-template-columns: 320px 1fr;
@@ -318,7 +319,6 @@
       gap: 8px;
     }
 
-    /* 📌 좌측 프로필 카드: 수직 Flex 구조로 4:3 수직 비율 배분 */
     .about-profile-card {
       background: #0f172a;
       border-radius: 18px;
@@ -330,7 +330,6 @@
       gap: 12px;
     }
 
-    /* 상단 이미지 영역 (비율 = 4) */
     .profile-top-area {
       flex: 4;
       display: flex;
@@ -358,7 +357,6 @@
       display: block;
     }
 
-    /* 하단 텍스트(Introduce) 영역 (비율 = 3) */
     .intro-integrated-box {
       flex: 3;
       padding-top: 14px;
@@ -382,15 +380,9 @@
       gap: 6px;
     }
 
-    .intro-integrated-box p {
-      margin-bottom: 8px;
-    }
+    .intro-integrated-box p { margin-bottom: 8px; }
+    .intro-integrated-box p:last-child { margin-bottom: 0; }
 
-    .intro-integrated-box p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* 📌 우측 그리드 비율 배치 (1 : 1 : 2) */
     .about-right-grid {
       display: flex;
       flex-direction: column;
@@ -455,7 +447,7 @@
     .class-name { font-weight: 600; color: #f1f5f9; font-size: 0.88rem; }
     .class-date { font-size: 0.8rem; color: #94a3b8; }
 
-    /* 📌 [페이지 3 & 4] 스와이프형 커버플로우 갤러리 */
+    /* 📌 [페이지 3, 4, 5] 스와이프형 커버플로우 갤러리 공통 */
     .slider-wrapper {
       position: relative;
       width: 100%;
@@ -598,6 +590,7 @@
 
     .card.art-card:hover { border-color: rgba(56, 189, 248, 0.8); }
     .card.video-card:hover { border-color: rgba(248, 113, 113, 0.8); }
+    .card.anim-card:hover { border-color: rgba(192, 132, 252, 0.8); }
 
     .card-main-link { display: block; text-decoration: none; color: inherit; }
 
@@ -665,9 +658,11 @@
       color: #f87171;
     }
 
+    .youtube-text.anim-text { color: #c084fc; }
+
     .youtube-text svg { width: 14px; height: 14px; fill: currentColor; }
 
-    /* 📌 [페이지 5] 푸터 섹션 */
+    /* 📌 [페이지 6] 푸터 섹션 */
     .footer-section { text-align: center; }
     .footer-content h2 { font-size: 2rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
     .footer-content h2 i { color: #38bdf8; }
@@ -697,6 +692,7 @@
 </head>
 <body>
 
+  <!-- 📌 [페이지 1] 메인 히어로 배너 -->
   <section class="snap-section hero-banner active" id="heroSection">
     <div class="hero-container reveal-content">
       
@@ -706,6 +702,7 @@
         <p class="bio">일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.</p>
       </div>
 
+      <!-- 📌 오른쪽 SNS 링크 바 -->
       <div class="hero-right-social">
         <a href="https://x.com/PPSG87125194" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -727,12 +724,14 @@
 
     </div>
 
+    <!-- 📌 네비게이션 바 (6개 탭 구조) -->
     <div class="adaptive-nav" id="mainNav">
       <div class="tab-container-inline">
         <button class="tab-btn active" onclick="scrollToSection('heroSection')"><i class="fa-solid fa-house"></i> Home</button>
         <button class="tab-btn" onclick="scrollToSection('aboutSection')"><i class="fa-solid fa-user"></i> About Me</button>
-        <button class="tab-btn" onclick="scrollToSection('artSection')"><i class="fa-solid fa-palette"></i> Image</button>
+        <button class="tab-btn" onclick="scrollToSection('artSection')"><i class="fa-solid fa-palette"></i> Illustration</button>
         <button class="tab-btn" onclick="scrollToSection('videoSection')"><i class="fa-solid fa-film"></i> Video</button>
+        <button class="tab-btn" onclick="scrollToSection('animSection')"><i class="fa-solid fa-wand-magic-sparkles"></i> Animation</button>
         <button class="tab-btn" onclick="scrollToSection('contactSection')"><i class="fa-solid fa-paper-plane"></i> Contact</button>
       </div>
     </div>
@@ -743,13 +742,16 @@
     </div>
   </section>
 
+  <!-- 📌 [페이지 2] About Me -->
   <section class="snap-section" id="aboutSection">
     <div class="reveal-content">
       <h2 class="section-title"><i class="fa-solid fa-user"></i> About Me</h2>
       
       <div class="about-integrated-grid">
+        <!-- 👈 좌측 통합 프로필 카드 -->
         <div class="about-profile-card stagger-box">
           
+          <!-- 상단 이미지 영역 (비율 = 4) -->
           <div class="profile-top-area">
             <div class="profile-img-box-rect">
               <img src="./투명화/프로필.png" alt="Profile Image">
@@ -758,6 +760,7 @@
             <p style="color: #94a3b8; font-size: 0.8rem;">일러스트 & 영상 커미션 및 외주 작업 진행</p>
           </div>
 
+          <!-- 하단 Introduce 영역 (비율 = 3) -->
           <div class="intro-integrated-box">
             <h4><i class="fa-solid fa-comment-dots"></i> Introduce</h4>
             <p>안녕하세요! 매력적인 캐릭터와 분위기를 그리는 창작자입니다.</p>
@@ -766,8 +769,10 @@
 
         </div>
 
+        <!-- 👉 우측 1 : 1 : 2 비율 레이아웃 -->
         <div class="about-right-grid">
           
+          <!-- 1. Skills (비율 = 1) -->
           <div class="about-card grid-ratio-1 stagger-box">
             <h3><i class="fa-solid fa-wrench" style="color: #38bdf8;"></i> Skills</h3>
             <div class="skill-bar-list">
@@ -794,6 +799,7 @@
             </div>
           </div>
 
+          <!-- 2. Class (비율 = 1) -->
           <div class="about-card grid-ratio-1 stagger-box">
             <h3><i class="fa-solid fa-graduation-cap" style="color: #38bdf8;"></i> Class</h3>
             <div class="class-list">
@@ -803,6 +809,7 @@
             </div>
           </div>
 
+          <!-- 3. Major Activities (비율 = 2, 가장 강조) -->
           <div class="about-card grid-ratio-2 stagger-box">
             <h3><i class="fa-solid fa-clapperboard" style="color: #38bdf8;"></i> Major Activities</h3>
             <ul class="activity-list">
@@ -818,9 +825,10 @@
     </div>
   </section>
 
+  <!-- 📌 [페이지 3] 이미지 갤러리 -->
   <section class="snap-section" id="artSection">
     <div class="reveal-content">
-      <h2 class="section-title"><i class="fa-solid fa-palette"></i> Image Gallery</h2>
+      <h2 class="section-title"><i class="fa-solid fa-palette"></i> Illustration </h2>
       
       <div class="slider-wrapper" id="artSliderWrapper">
         <button class="slider-btn prev" onclick="slideGallery('artSliderTrack', -1)">❮</button>
@@ -837,9 +845,10 @@
     </div>
   </section>
 
+  <!-- 📌 [페이지 4] 비디오 갤러리 -->
   <section class="snap-section" id="videoSection">
     <div class="reveal-content">
-      <h2 class="section-title"><i class="fa-solid fa-film"></i> Video Gallery</h2>
+      <h2 class="section-title"><i class="fa-solid fa-film"></i> Video </h2>
       
       <div class="slider-wrapper" id="videoSliderWrapper">
         <button class="slider-btn prev" onclick="slideGallery('videoSliderTrack', -1)">❮</button>
@@ -856,6 +865,27 @@
     </div>
   </section>
 
+  <!-- 📌 [페이지 5] 애니메이션 갤러리 (신규 추가) -->
+  <section class="snap-section" id="animSection">
+    <div class="reveal-content">
+      <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Animation </h2>
+      
+      <div class="slider-wrapper" id="animSliderWrapper">
+        <button class="slider-btn prev" onclick="slideGallery('animSliderTrack', -1)">❮</button>
+        <div class="slider-track" id="animSliderTrack"></div>
+        <button class="slider-btn next" onclick="slideGallery('animSliderTrack', 1)">❯</button>
+      </div>
+
+      <div class="more-btn-wrapper">
+        <a href="https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA" target="_blank" rel="noopener noreferrer" class="more-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube 채널에서 애니메이션 더 보기 ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📌 [페이지 6] 하단 푸터 섹션 -->
   <section class="snap-section footer-section" id="contactSection">
     <div class="reveal-content footer-content">
       <h2>Let's Work Together! <i class="fa-solid fa-paper-plane"></i></h2>
@@ -880,24 +910,29 @@
       { title: "산나비 - 송소령", imagePath: "./투명화/144633209_p0_master1200.jpg", pixivUrl: "https://www.pixiv.net/artworks/144633209", xUrl: unifiedXUrl },
       { title: "PUKEY GODDESS SHOT TRICK", imagePath: "./투명화/26.05.03.png", pixivUrl: "https://www.pixiv.net/artworks/145161974", xUrl: unifiedXUrl },
       { title: "하나코 나나", imagePath: "./투명화/일러스트.png", pixivUrl: "https://www.pixiv.net/artworks/145533224", xUrl: unifiedXUrl },
-      { title: "이터널 리턴 - 데비 & 마를렌", imagePath: "./투명화/147151660_p0_master1200.jpg", pixivUrl: "https://www.pixiv.net/artworks/147151660", xUrl: unifiedXUrl },
+      { title: "대뇨롱", imagePath: "./투명화/147151660_p0_master1200.jpg", pixivUrl: "https://www.pixiv.net/artworks/147151660", xUrl: unifiedXUrl },
       { title: "이터널 리턴 - 데비 & 마를렌", imagePath: "./투명화/26.06.05.png", pixivUrl: "https://www.pixiv.net/artworks/147334778", xUrl: unifiedXUrl },
       { title: "밍꾸냥님 방송화면", imagePath: "./투명화/26.07.23.png", pixivUrl: "https://pixiv.net/users/93480186", xUrl: unifiedXUrl },
       { title: "SD 캐릭터", imagePath: "./투명화/SD캐릭터1.jpg", pixivUrl: "https://www.pixiv.net/artworks/149168036", xUrl: unifiedXUrl }
     ];
 
+    /* 📌 1) 일반 영상 작업물 (Video) */
     const videoList = [
       { title: "AI활용 브이로그", youtubeId: "e2_TtUY9_OY" },
       { title: "브이로그 촬영", youtubeId: "SXKLXFxd7AQ" },
       { title: "교차편집", youtubeId: "o7AsicCs_f8" },
-      { title: "쇼츠 애니메이션", youtubeId: "ecpvLpdLo8M" },
-      { title: "하나코 나나 - Enermy", youtubeId: "P5U_WQBnWIs" },
-      { title: "(연습)플레이스테이션 광고", youtubeId: "gk-4oLWbBkI" }
+      { title: "하나코 나나 - Enemy (모션 연출)", youtubeId: "P5U_WQBnWIs" }
+    ];
+
+    /* 📌 2) 애니메이션 / 모션 작업물 (Animation) */
+    const animationList = [
+      { title: "나나양x램램 쇼츠 애니메이션", youtubeId: "t27WrEvMvZU" }
     ];
 
     const xLogoSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
     const ytLogoSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`;
 
+    /* 🎨 Image 카드 생성 */
     const artSliderTrack = document.getElementById('artSliderTrack');
     artList.slice().reverse().forEach(art => {
       const card = document.createElement('div');
@@ -911,6 +946,7 @@
       artSliderTrack.appendChild(card);
     });
 
+    /* 🎬 Video 카드 생성 */
     const videoSliderTrack = document.getElementById('videoSliderTrack');
     videoList.slice().reverse().forEach(item => {
       const card = document.createElement('div');
@@ -927,6 +963,25 @@
           </div>
         </a>`;
       videoSliderTrack.appendChild(card);
+    });
+
+    /* ✨ Animation 카드 생성 */
+    const animSliderTrack = document.getElementById('animSliderTrack');
+    animationList.slice().reverse().forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'slider-card';
+      card.innerHTML = `
+        <a href="https://www.youtube.com/watch?v=${item.youtubeId}" target="_blank" class="card anim-card card-main-link">
+          <div class="media-box">
+            <img src="https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg" alt="${item.title}">
+            <div class="play-btn"></div>
+          </div>
+          <div class="info">
+            <div class="title">${item.title}</div>
+            <div class="youtube-text anim-text" style="margin-top: 6px;">${ytLogoSvg} YouTube에서 보기 ↗</div>
+          </div>
+        </a>`;
+      animSliderTrack.appendChild(card);
     });
 
     function updateCenterCard(track) {
@@ -973,35 +1028,33 @@
 
     let artAutoTimer = null;
     let videoAutoTimer = null;
+    let animAutoTimer = null;
 
     function startArtAutoSlide() {
       if (!artAutoTimer) {
-        artAutoTimer = setInterval(() => {
-          slideGallery('artSliderTrack', 1);
-        }, 3000);
+        artAutoTimer = setInterval(() => { slideGallery('artSliderTrack', 1); }, 3000);
       }
     }
-
     function stopArtAutoSlide() {
-      if (artAutoTimer) {
-        clearInterval(artAutoTimer);
-        artAutoTimer = null;
-      }
+      if (artAutoTimer) { clearInterval(artAutoTimer); artAutoTimer = null; }
     }
 
     function startVideoAutoSlide() {
       if (!videoAutoTimer) {
-        videoAutoTimer = setInterval(() => {
-          slideGallery('videoSliderTrack', 1);
-        }, 3000);
+        videoAutoTimer = setInterval(() => { slideGallery('videoSliderTrack', 1); }, 3000);
       }
     }
-
     function stopVideoAutoSlide() {
-      if (videoAutoTimer) {
-        clearInterval(videoAutoTimer);
-        videoAutoTimer = null;
+      if (videoAutoTimer) { clearInterval(videoAutoTimer); videoAutoTimer = null; }
+    }
+
+    function startAnimAutoSlide() {
+      if (!animAutoTimer) {
+        animAutoTimer = setInterval(() => { slideGallery('animSliderTrack', 1); }, 3000);
       }
+    }
+    function stopAnimAutoSlide() {
+      if (animAutoTimer) { clearInterval(animAutoTimer); animAutoTimer = null; }
     }
 
     function scrollToSection(id) {
@@ -1027,9 +1080,7 @@
           }
         }
 
-        setTimeout(() => {
-          requestAnimationFrame(updateCount);
-        }, 450);
+        setTimeout(() => { requestAnimationFrame(updateCount); }, 450);
       });
     }
 
@@ -1052,7 +1103,7 @@
         }
       });
 
-      ['artSliderTrack', 'videoSliderTrack'].forEach(trackId => {
+      ['artSliderTrack', 'videoSliderTrack', 'animSliderTrack'].forEach(trackId => {
         const track = document.getElementById(trackId);
         if (track) {
           const updatePadding = () => {
@@ -1078,6 +1129,10 @@
       videoWrapper.addEventListener('mouseenter', stopVideoAutoSlide);
       videoWrapper.addEventListener('mouseleave', startVideoAutoSlide);
 
+      const animWrapper = document.getElementById('animSliderWrapper');
+      animWrapper.addEventListener('mouseenter', stopAnimAutoSlide);
+      animWrapper.addEventListener('mouseleave', startAnimAutoSlide);
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1087,6 +1142,7 @@
             if (id === 'aboutSection') animateCounters();
             if (id === 'artSection') startArtAutoSlide();
             if (id === 'videoSection') startVideoAutoSlide();
+            if (id === 'animSection') startAnimAutoSlide();
 
             const buttons = document.querySelectorAll('.adaptive-nav .tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -1094,13 +1150,15 @@
             else if (id === 'aboutSection') buttons[1].classList.add('active');
             else if (id === 'artSection') buttons[2].classList.add('active');
             else if (id === 'videoSection') buttons[3].classList.add('active');
-            else if (id === 'contactSection') buttons[4].classList.add('active');
+            else if (id === 'animSection') buttons[4].classList.add('active');
+            else if (id === 'contactSection') buttons[5].classList.add('active');
           } else {
             entry.target.classList.remove("active");
             const id = entry.target.id;
             if (id === 'aboutSection') resetCounters();
             if (id === 'artSection') stopArtAutoSlide();
             if (id === 'videoSection') stopVideoAutoSlide();
+            if (id === 'animSection') stopAnimAutoSlide();
           }
         });
       }, { threshold: 0.5 });
