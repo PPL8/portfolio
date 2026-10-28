@@ -1,0 +1,20 @@
+{
+  "id": "video-02",
+  "title": "브이로그 촬영",
+  "mediaType": "video",
+  "category": "개인작",
+  "date": "2026.05",
+  "year": 2026,
+  "imagePath": "",
+  "youtubeId": "SXKLXFxd7AQ",
+  "pixivUrl": "",
+  "xUrl": "",
+  "detailUrl": "https://www.youtube.com/watch?v=SXKLXFxd7AQ",
+  "duration": "약 3일",
+  "tools": "Premiere Pro",
+  "comment": "코멘터리가 없습니다.",
+  "tags": [],
+  "published": true,
+  "featured": true,
+  "order": 2
+}

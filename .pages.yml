@@ -1,0 +1,109 @@
+media:
+  - name: portfolioImages
+    label: Portfolio images
+    input: 투명화
+    output: ./투명화
+    categories: [image]
+    extensions: [png, jpg, jpeg, webp, gif]
+    rename: safe
+
+content:
+  - name: works
+    label: Works
+    type: collection
+    path: content/works
+    format: json
+    filename: "{id}.json"
+    view:
+      fields: [title, category, year, published, order]
+      primary: title
+      sort: [order, title, year]
+      search: [title, category, year, tags, comment]
+      default:
+        search: ""
+        sort: order
+        order: asc
+    fields:
+      - name: id
+        label: 작품 ID
+        type: string
+        required: true
+      - name: title
+        label: 작품명
+        type: string
+        required: true
+      - name: mediaType
+        label: 작품 유형
+        type: select
+        required: true
+        options:
+          values:
+            - name: art
+              label: Illustration
+            - name: video
+              label: Video
+            - name: animation
+              label: Animation
+      - name: category
+        label: 카테고리
+        type: select
+        required: true
+        options:
+          values: [개인작, 외주]
+      - name: date
+        label: 제작 시기
+        type: string
+      - name: year
+        label: 제작 연도
+        type: number
+      - name: imagePath
+        label: 대표 이미지 / 썸네일
+        type: image
+        options:
+          media: portfolioImages
+          path: 투명화
+          extensions: [png, jpg, jpeg, webp, gif]
+      - name: comment
+        label: 작품 설명
+        type: text
+      - name: tags
+        label: 태그
+        type: string
+        list: true
+      - name: detailUrl
+        label: 상세페이지 주소
+        type: string
+      - name: pixivUrl
+        label: Pixiv 주소
+        type: string
+      - name: xUrl
+        label: X 게시글 / 프로필 주소
+        type: string
+      - name: youtubeId
+        label: YouTube 영상 ID
+        type: string
+      - name: duration
+        label: 작업 기간
+        type: string
+      - name: tools
+        label: 사용 프로그램
+        type: string
+      - name: published
+        label: 공개 여부
+        type: boolean
+        default: true
+      - name: featured
+        label: 메인 노출
+        type: boolean
+        default: true
+      - name: order
+        label: 노출 순서
+        type: number
+        required: true
+        default: 100
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: app
