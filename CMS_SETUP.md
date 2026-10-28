@@ -2,9 +2,10 @@
 
 ## 연결 방법
 1. [Pages CMS](https://app.pagescms.org/)에 GitHub 계정으로 로그인합니다.
-2. PPL8 계정의 `portfolio` 저장소를 선택합니다.
-3. CMS에서 브랜치 `main`을 선택합니다. 초기 구성은 `feat/pages-cms-works` 브랜치에 먼저 적용되어 있으므로, 변경 사항을 main에 반영한 뒤 main에서 관리하세요.
-4. 왼쪽 메뉴의 **Works** 컬렉션에서 기존 작품을 확인합니다.
+2. Pages CMS GitHub App이 `PPL8/portfolio` 저장소에 접근할 수 있도록 설치/권한을 확인합니다.
+3. 저장소 `PPL8/portfolio`를 선택하고 **main** 브랜치를 선택합니다.
+4. GitHub 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정합니다. 이 설정은 한 번만 필요합니다.
+5. CMS에서 **Works** 컬렉션을 열어 기존 작품을 확인합니다.
 
 ## 작품 추가·수정·삭제
 - Works에서 새 항목을 만들고 고유한 작품 ID(예: `art-13`, `video-07`)를 입력합니다.
@@ -33,13 +34,9 @@
 - 웹사이트가 읽는 생성 데이터: `data/works.js`
 - 웹페이지와 기존 카드/모달 UI: `index.html`
 
-CMS가 JSON을 저장하면 GitHub Actions의 **Sync Works Data** 워크플로가 모든 작품 JSON을 검사하고, 공개된 작품만 유형별로 정렬해 `data/works.js`를 갱신합니다. 이 생성 커밋은 GitHub Actions 토큰으로 작성되어 무한 반복 실행을 방지합니다. GitHub Pages가 저장소의 main 브랜치 루트에서 배포 중이라면 갱신된 파일이 사이트에 반영됩니다.
+CMS가 main 브랜치의 작품 JSON을 저장하면 **Build and Deploy Portfolio** 워크플로가 실행됩니다. 워크플로는 모든 JSON을 검사하고 `data/works.js`를 다시 생성한 뒤, `index.html`, `data/`, `투명화/`만 포함한 정적 사이트 아티팩트를 GitHub Pages에 직접 배포합니다. 별도의 생성 커밋을 만들지 않으므로 GitHub Actions 토큰이 만든 커밋 때문에 Pages 배포가 누락되는 문제를 피합니다.
 
-## 배포 확인
-1. GitHub 저장소의 **Actions → Sync Works Data**에서 실행 상태를 확인합니다.
-2. 성공 로그에 검증된 전체 작품 수와 공개 작품 수가 표시되는지 확인합니다.
-3. `data/works.js`의 최신 커밋을 확인합니다.
-4. [https://ppl8.github.io/portfolio/](https://ppl8.github.io/portfolio/)에서 Illustration, Video, Animation 갤러리와 상세 모달을 확인합니다.
+워크플로는 `content/works/**` 변경과 사이트 관련 파일 변경 시 실행됩니다. Pull Request에서는 데이터 검증과 아티팩트 생성까지만 수행하고 실제 배포는 하지 않습니다.
 
 ## 참고
 - `featured`(메인 노출)는 CMS에서 관리하는 플래그입니다. 현재 사이트에는 별도의 대표 작품 섹션이 없으므로 실제 카드 표시 여부는 `published`가 제어합니다.
