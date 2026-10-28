@@ -12,10 +12,15 @@ for (const file of files) {
   const fullPath = path.join(worksDir, file);
   const item = JSON.parse(await readFile(fullPath, "utf8"));
   if (!item || typeof item !== "object" || Array.isArray(item)) throw new Error(`Invalid work object: ${file}`);
-  for (const field of ["id", "title", "mediaType", "category", "imagePath"]) {
+  for (const field of ["id", "title", "mediaType", "category"]) {
     if (typeof item[field] !== "string" || !item[field].trim()) throw new Error(`Missing ${field} in ${file}`);
   }
   if (!["art", "video", "animation"].includes(item.mediaType)) throw new Error(`Unsupported mediaType in ${file}: ${item.mediaType}`);
+  item.imagePath = typeof item.imagePath === "string" ? item.imagePath.trim() : "";
+  item.youtubeId = typeof item.youtubeId === "string" ? item.youtubeId.trim() : "";
+  if (item.mediaType === "art" && !item.imagePath) throw new Error(`Missing imagePath for artwork in ${file}`);
+  if (["video", "animation"].includes(item.mediaType) && !item.youtubeId) throw new Error(`Missing youtubeId in ${file}`);
+  if (!item.imagePath && item.youtubeId) item.imagePath = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
   if (ids.has(item.id)) throw new Error(`Duplicate work id: ${item.id}`);
   ids.add(item.id);
   item.order = Number.isFinite(Number(item.order)) ? Number(item.order) : 100;
