@@ -1338,7 +1338,7 @@
     }
 
     function getCardLinkBtnHtml(item) {
-      const url = item.pixivUrl || item.xUrl || (item.youtubeId ? `https://www.youtube.com/watch?v=${item.youtubeId}` : null);
+      const url = item.detailUrl || item.pixivUrl || item.xUrl || (item.youtubeId ? `https://www.youtube.com/watch?v=${item.youtubeId}` : null);
       if (!url) return '';
 
       let svgIcon = '';
@@ -1381,7 +1381,7 @@
       card.innerHTML = `
         <div class="card video-card">
           <div class="media-box">
-            <img src="https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg" alt="${item.title}">
+            <img src="${item.imagePath || `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}" alt="${item.title}">
             <div class="play-btn"></div>
           </div>
           <div class="info">
@@ -1408,7 +1408,7 @@
       card.innerHTML = `
         <div class="card anim-card">
           <div class="media-box">
-            <img src="https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg" alt="${item.title}">
+            <img src="${item.imagePath || `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}" alt="${item.title}">
             <div class="play-btn"></div>
           </div>
           <div class="info">
@@ -1476,7 +1476,11 @@
         modalLinksContainer.innerHTML += `<a href="${data.xUrl}" target="_blank" class="modal-link-btn x">${xLogoSvg} X (트위터) 게시글 보기 ↗</a>`;
       }
       if (data.youtubeId) {
-        modalLinksContainer.innerHTML += `<a href="https://www.youtube.com/watch?v=${data.youtubeId}" target="_blank" class="modal-link-btn youtube">${ytLogoSvg} YouTube에서 직접 보기 ↗</a>`;
+        modalLinksContainer.innerHTML += `<a href="https://www.youtube.com/watch?v=${data.youtubeId}" target="_blank" rel="noopener noreferrer" class="modal-link-btn youtube">${ytLogoSvg} YouTube에서 직접 보기 ↗</a>`;
+      }
+      const youtubeUrl = data.youtubeId ? `https://www.youtube.com/watch?v=${data.youtubeId}` : "";
+      if (data.detailUrl && data.detailUrl !== data.pixivUrl && data.detailUrl !== data.xUrl && data.detailUrl !== youtubeUrl) {
+        modalLinksContainer.innerHTML += `<a href="${data.detailUrl}" target="_blank" rel="noopener noreferrer" class="modal-link-btn">상세 페이지에서 작품 보기 ↗</a>`;
       }
     }
 
