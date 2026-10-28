@@ -28,7 +28,6 @@ content:
         label: 작품 ID
         type: string
         required: true
-        pattern: "^[a-z0-9-]+$"
       - name: title
         label: 작품명
         type: string
