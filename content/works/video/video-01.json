@@ -1,0 +1,20 @@
+{
+  "id": "video-01",
+  "title": "AI활용 브이로그",
+  "mediaType": "video",
+  "category": "개인작",
+  "date": "2026.05",
+  "year": 2026,
+  "imagePath": "",
+  "youtubeId": "e2_TtUY9_OY",
+  "pixivUrl": "",
+  "xUrl": "",
+  "detailUrl": "https://www.youtube.com/watch?v=e2_TtUY9_OY",
+  "duration": "약 3일",
+  "tools": "Premiere Pro, Google Flow",
+  "comment": "제미나이, 구글플로우를 활용하여 제작되었습니다.",
+  "tags": [],
+  "published": true,
+  "featured": true,
+  "order": 1
+}
