@@ -1,0 +1,15 @@
+{
+  "id": "1",
+  "title": "테스트용",
+  "mediaType": "art",
+  "category": "개인작",
+  "date": "1",
+  "year": 1,
+  "imagePath": "./투명화/6-2.png",
+  "comment": "1",
+  "duration": "1",
+  "tools": "1",
+  "published": true,
+  "featured": true,
+  "order": 100
+}
