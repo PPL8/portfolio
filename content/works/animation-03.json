@@ -1,0 +1,17 @@
+{
+  "id": "animation-03",
+  "title": "산나비 만화",
+  "mediaType": "animation",
+  "category": "개인작",
+  "date": "2026.10",
+  "year": 2026,
+  "imagePath": "./투명화/7-2.png",
+  "comment": "콜라보 카페 기념으로 만들었는데 본인은 예약에 실패해버린...",
+  "detailUrl": "https://www.youtube.com/shorts/e9VDcNKiIJU",
+  "youtubeId": "e9VDcNKiIJU",
+  "duration": "10 일",
+  "tools": "CLIP STUDIO, CapCut",
+  "published": true,
+  "featured": true,
+  "order": 100
+}
