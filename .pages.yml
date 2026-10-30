@@ -280,6 +280,84 @@ content:
         required: true
         default: 0
 
+  - name: siteSettings
+    label: 사이트 설정
+    type: group
+    items:
+      - name: site
+        label: 홈페이지 콘텐츠
+        type: file
+        path: content/site-settings.json
+        format: json
+        operations:
+          delete: false
+        fields:
+          - name: heroBadge
+            label: 메인 배너 상단 문구
+            type: string
+          - name: heroTitle
+            label: 메인 제목 (줄바꿈 가능)
+            type: text
+          - name: heroDescription
+            label: 메인 소개 문구
+            type: text
+          - name: heroBannerImage
+            label: 메인 배너 이미지
+            type: image
+            options:
+              media: portfolioImages
+              path: 투명화
+              extensions: [png, jpg, jpeg, webp, gif]
+          - name: xUrl
+            label: X 주소
+            type: string
+          - name: pixivUrl
+            label: Pixiv 주소
+            type: string
+          - name: youtubeUrl
+            label: YouTube 주소
+            type: string
+          - name: profileImage
+            label: 프로필 사진
+            type: image
+            options:
+              media: portfolioImages
+              path: 투명화
+              extensions: [png, jpg, jpeg, webp, gif]
+          - name: profileSubtitle
+            label: 프로필 한 줄 소개
+            type: string
+          - name: introLine1
+            label: 소개 문구 1
+            type: string
+          - name: introLine2
+            label: 소개 문구 2
+            type: string
+          - name: services
+            label: 작업 분야 목록
+            type: string
+            list: true
+          - name: email
+            label: 이메일
+            type: string
+          - name: crepeUrl
+            label: 크레페 주소
+            type: string
+          - name: contactTitle
+            label: Contact 제목
+            type: string
+          - name: contactDescription
+            label: Contact 설명
+            type: text
+          - name: contactButtonLabel
+            label: Contact 버튼 문구
+            type: string
+          - name: copyrightText
+            label: 저작권 문구
+            type: string
+          - name: copyrightNotice
+            label: 저작권 안내
+            type: text
 settings:
   content:
     merge: true
