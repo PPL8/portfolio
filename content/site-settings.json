@@ -1,0 +1,26 @@
+{
+  "heroBadge": "CREATIVE PORTFOLIO",
+  "heroTitle": "이야기와 분위기를\n담아내는 크리에이터",
+  "heroDescription": "일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.",
+  "heroBannerImage": "./투명화/26.07.23.png",
+  "xUrl": "https://x.com/PPSG87125194",
+  "pixivUrl": "https://pixiv.net/users/93480186",
+  "youtubeUrl": "https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA",
+  "profileImage": "./투명화/프로필.png",
+  "profileSubtitle": "일러스트 & 영상 커미션 및 외주 작업 진행",
+  "introLine1": "마음껏 꿈꾸세요.",
+  "introLine2": "제가 만들어드리겠습니다!",
+  "services": [
+    "캐릭터 일러스트",
+    "영상툰",
+    "방송용 / 게임용 소스",
+    "영상 편집"
+  ],
+  "email": "elfjrjtm996@gmail.com",
+  "crepeUrl": "https://crepe.cm/ko/@PPL8",
+  "contactTitle": "Let's Work Together!",
+  "contactDescription": "작업 의뢰 및 커미션 신청은 크레페(crepe) 페이지를 통해 진행하고 있습니다.",
+  "contactButtonLabel": "크레페에서 의뢰 신청하기 ↗",
+  "copyrightText": "© 2026. All rights reserved.",
+  "copyrightNotice": "All images and videos contained on this site are protected by copyright."
+}
