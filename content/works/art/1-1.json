@@ -1,0 +1,14 @@
+{
+  "id": "1",
+  "title": "테스트용 2",
+  "mediaType": "art",
+  "category": "외주",
+  "date": "2026.11",
+  "year": 2026,
+  "imagePath": "./투명화/12.png",
+  "comment": "삭제용",
+  "tools": "ㄹㄴㄷㅌ",
+  "published": true,
+  "featured": true,
+  "order": 100
+}
