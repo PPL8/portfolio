@@ -1334,7 +1334,7 @@
       };
       const hero = document.getElementById("heroSection");
       if (hero && site.heroBannerImage) {
-        hero.style.backgroundImage = 'url("' + site.heroBannerImage.replace(/["\\\\]/g, "") + '")';
+        hero.style.backgroundImage = 'url("' + site.heroBannerImage + '")';
       }
       setText("siteHeroBadge", site.heroBadge);
       const title = document.getElementById("siteHeroTitle");
