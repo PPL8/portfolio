@@ -8,5 +8,7 @@
   "comment": "순서 확인용",
   "published": true,
   "featured": true,
-  "order": 0
+  "order": 0,
+  "imagePath": "./투명화/4.png",
+  "duration": "10"
 }
