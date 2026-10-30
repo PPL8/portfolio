@@ -61,3 +61,14 @@ await mkdir(path.dirname(outFile), { recursive: true });
 const payload = "/* Generated from content/works/{art,video,animation}/*.json. Do not edit manually. */\nwindow.PORTFOLIO_WORKS = " + JSON.stringify(result, null, 2) + ";\n";
 await writeFile(outFile, payload, "utf8");
 console.log(`Validated ${all.length} works; publishing ${published.length} (${result.art.length} illustration, ${result.video.length} video, ${result.animation.length} animation).`);
+
+// Build editable homepage content from Pages CMS.
+const sitePath = path.join(root, "content", "site-settings.json");
+const siteOutFile = path.join(root, "data", "site.js");
+const site = JSON.parse(await readFile(sitePath, "utf8"));
+if (!site || typeof site !== "object" || Array.isArray(site)) {
+  throw new Error("Invalid site settings: content/site-settings.json");
+}
+const sitePayload = "/* Generated from content/site-settings.json. Do not edit manually. */\nwindow.PORTFOLIO_SITE = " + JSON.stringify(site, null, 2) + ";\n";
+await writeFile(siteOutFile, sitePayload, "utf8");
+console.log("Generated homepage site settings.");
