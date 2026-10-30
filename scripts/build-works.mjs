@@ -14,6 +14,7 @@ const ids = new Set();
 for (const collection of collections) {
   const worksDir = path.join(root, "content", "works", collection.dir);
   const files = (await readdir(worksDir)).filter((name) => name.endsWith(".json")).sort();
+  const collectionItems = [];
 
   for (const file of files) {
     const fullPath = path.join(worksDir, file);
@@ -31,10 +32,20 @@ for (const collection of collections) {
     if (!item.imagePath && item.youtubeId) item.imagePath = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
     if (ids.has(item.id)) throw new Error(`Duplicate work id: ${item.id}`);
     ids.add(item.id);
-    item.order = Number.isFinite(Number(item.order)) ? Number(item.order) : 100;
+    const requestedOrder = Number(item.order);
+    item.order = Number.isFinite(requestedOrder) ? requestedOrder : 0;
     item.published = item.published !== false;
     item.featured = item.featured !== false;
     item.tags = Array.isArray(item.tags) ? item.tags : [];
+    collectionItems.push(item);
+  }
+
+  // A zero (or negative) order means "assign the next order" for this collection.
+  let nextOrder = Math.max(0, ...collectionItems.filter((item) => item.order > 0).map((item) => item.order));
+  for (const item of collectionItems) {
+    if (item.order <= 0) {
+      item.order = ++nextOrder;
+    }
     all.push(item);
   }
 }
