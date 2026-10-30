@@ -24,9 +24,10 @@ content:
         order: asc
     fields:
       - name: id
-        label: 작품 ID
-        type: string
-        required: true
+        label: 작품 ID (자동 생성)
+        type: uuid
+        options:
+          editable: false
       - name: title
         label: 작품명
         type: string
@@ -114,9 +115,10 @@ content:
         order: asc
     fields:
       - name: id
-        label: 작품 ID
-        type: string
-        required: true
+        label: 작품 ID (자동 생성)
+        type: uuid
+        options:
+          editable: false
       - name: title
         label: 작품명
         type: string
@@ -204,9 +206,10 @@ content:
         order: asc
     fields:
       - name: id
-        label: 작품 ID
-        type: string
-        required: true
+        label: 작품 ID (자동 생성)
+        type: uuid
+        options:
+          editable: false
       - name: title
         label: 작품명
         type: string
