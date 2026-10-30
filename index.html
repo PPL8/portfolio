@@ -129,7 +129,9 @@
 
     /* 📌 [섹션 1] 히어로 메인 배너 */
     .hero-banner {
-      background: url('./투명화/26.07.23.png') center center / cover no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
       justify-content: flex-start;
       padding-top: 170px;
     }
@@ -1047,22 +1049,22 @@
     <div class="hero-container reveal-content">
       
       <div class="hero-left">
-        <div class="profile-badge">CREATIVE PORTFOLIO</div>
-        <h1>이야기와 분위기를<br>담아내는 크리에이터</h1>
-        <p class="bio">일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.</p>
+        <div class="profile-badge" id="siteHeroBadge">CREATIVE PORTFOLIO</div>
+        <h1 id="siteHeroTitle">이야기와 분위기를<br>담아내는 크리에이터</h1>
+        <p class="bio" id="siteHeroDescription">일러스트레이션과 영상 편집 작업을 진행하고 있습니다. 외주 및 신청 문의는 아래 크레페 페이지를 확인해 주세요.</p>
       </div>
 
       <!-- 📌 오른쪽 SNS 링크 바 -->
       <div class="hero-right-social">
-        <a href="https://x.com/PPSG87125194" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
+        <a id="siteXLink" href="https://x.com/PPSG87125194" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           X (Twitter)
         </a>
-        <a href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
+        <a id="sitePixivLink" href="https://pixiv.net/users/93480186" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
           <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0096FA"/><path d="M12.875 6.5H8.25V17.5H10.75V13.25H12.875C15.222 13.25 17.125 11.739 17.125 9.875C17.125 8.011 15.222 6.5 12.875 6.5ZM12.625 11.25H10.75V8.5H12.625C13.868 8.5 14.875 9.116 14.875 9.875C14.875 10.634 13.868 11.25 12.625 11.25Z" fill="#FFFFFF"/></svg>
           Pixiv
         </a>
-        <a href="https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
+        <a id="siteYoutubeLink" href="https://youtube.com/channel/UC6yUTepzO6rVOBZyM9vaxaA" target="_blank" rel="noopener noreferrer" class="social-btn-vertical">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           YouTube
         </a>
@@ -1101,18 +1103,18 @@
         <div class="about-profile-card stagger-box">
           <div class="profile-top-area">
             <div class="profile-img-box-rect">
-              <img src="./투명화/프로필.png" alt="Profile Image">
+              <img id="siteProfileImage" src="./투명화/프로필.png" alt="Profile Image">
             </div>
             <h3 style="color: #fff; margin-bottom: 2px; letter-spacing: 1px;">PROFILE</h3>
-            <p style="color: #94a3b8; font-size: 0.8rem;">일러스트 & 영상 커미션 및 외주 작업 진행</p>
+            <p id="siteProfileSubtitle" style="color: #94a3b8; font-size: 0.8rem;">일러스트 & 영상 커미션 및 외주 작업 진행</p>
           </div>
 
           <div class="intro-integrated-box">
             <h4><i class="fa-solid fa-comment-dots"></i> Introduce</h4>
-            <p style="color: #ffffff; font-weight: 600; margin-top: 4px;">마음껏 꿈꾸세요.</p>
-            <p style="color: #ffffff; font-weight: 600;">제가 만들어드리겠습니다!</p>
+            <p id="siteIntroLine1" style="color: #ffffff; font-weight: 600; margin-top: 4px;">마음껏 꿈꾸세요.</p>
+            <p id="siteIntroLine2" style="color: #ffffff; font-weight: 600;">제가 만들어드리겠습니다!</p>
             
-            <ul class="intro-bullet-list">
+            <ul class="intro-bullet-list" id="siteServicesList">
               <li>캐릭터 일러스트</li>
               <li>영상툰</li>
               <li>방송용 / 게임용 소스</li>
@@ -1120,7 +1122,7 @@
             </ul>
 
             <div class="intro-email">
-              <i class="fa-regular fa-envelope"></i> elfjrjtm996@gmail.com
+              <i class="fa-regular fa-envelope"></i> <span id="siteEmail">elfjrjtm996@gmail.com</span>
             </div>
           </div>
         </div>
@@ -1254,16 +1256,16 @@
   <!-- 📌 [페이지 6] 푸터 섹션 -->
   <section class="snap-section footer-section" id="contactSection">
     <div class="reveal-content footer-content">
-      <h2>Let's Work Together! <i class="fa-solid fa-paper-plane"></i></h2>
-      <p>작업 의뢰 및 커미션 신청은 크레페(crepe) 페이지를 통해 진행하고 있습니다.</p>
-      <a href="https://crepe.cm/ko/@PPL8" target="_blank" rel="noopener noreferrer" class="crepe-link">
+      <h2><span id="siteContactTitle">Let's Work Together!</span> <i class="fa-solid fa-paper-plane"></i></h2>
+      <p id="siteContactDescription">작업 의뢰 및 커미션 신청은 크레페(crepe) 페이지를 통해 진행하고 있습니다.</p>
+      <a id="siteCrepeLink" href="https://crepe.cm/ko/@PPL8" target="_blank" rel="noopener noreferrer" class="crepe-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10.2 11.8c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8zm3.6 0c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8z"/></svg>
-        크레페에서 의뢰 신청하기 ↗
+        <span id="siteContactButtonLabel">크레페에서 의뢰 신청하기 ↗</span>
       </a>
       
       <div class="copyright">
-        <p>© 2026. All rights reserved.</p>
-        <p class="notice">All images and videos contained on this site are protected by copyright.</p>
+        <p id="siteCopyrightText">© 2026. All rights reserved.</p>
+        <p class="notice" id="siteCopyrightNotice">All images and videos contained on this site are protected by copyright.</p>
       </div>
     </div>
   </section>
@@ -1312,8 +1314,64 @@
     </div>
   </div>
 
+  <script src="./data/site.js"></script>
   <script src="./data/works.js"></script>
   <script>
+    /* Homepage content is generated from the Pages CMS site settings file. */
+    function applySiteSettings() {
+      const site = window.PORTFOLIO_SITE || {};
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el && typeof value === "string" && value.trim()) el.textContent = value;
+      };
+      const setHref = (id, value) => {
+        const el = document.getElementById(id);
+        if (el && typeof value === "string" && value.trim()) el.href = value;
+      };
+      const setImage = (id, value) => {
+        const el = document.getElementById(id);
+        if (el && typeof value === "string" && value.trim()) el.src = value;
+      };
+      const hero = document.getElementById("heroSection");
+      if (hero && site.heroBannerImage) {
+        hero.style.backgroundImage = 'url("' + site.heroBannerImage.replace(/["\\\\]/g, "") + '")';
+      }
+      setText("siteHeroBadge", site.heroBadge);
+      const title = document.getElementById("siteHeroTitle");
+      if (title && site.heroTitle) {
+        title.replaceChildren();
+        site.heroTitle.split(/\\r?\\n/).forEach((line, index) => {
+          if (index) title.appendChild(document.createElement("br"));
+          title.appendChild(document.createTextNode(line));
+        });
+      }
+      setText("siteHeroDescription", site.heroDescription);
+      setHref("siteXLink", site.xUrl);
+      setHref("sitePixivLink", site.pixivUrl);
+      setHref("siteYoutubeLink", site.youtubeUrl);
+      setImage("siteProfileImage", site.profileImage);
+      setText("siteProfileSubtitle", site.profileSubtitle);
+      setText("siteIntroLine1", site.introLine1);
+      setText("siteIntroLine2", site.introLine2);
+      const services = document.getElementById("siteServicesList");
+      if (services && Array.isArray(site.services)) {
+        services.replaceChildren();
+        site.services.filter(item => typeof item === "string" && item.trim()).forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          services.appendChild(li);
+        });
+      }
+      setText("siteEmail", site.email);
+      setHref("siteCrepeLink", site.crepeUrl);
+      setText("siteContactTitle", site.contactTitle);
+      setText("siteContactDescription", site.contactDescription);
+      setText("siteContactButtonLabel", site.contactButtonLabel);
+      setText("siteCopyrightText", site.copyrightText);
+      setText("siteCopyrightNotice", site.copyrightNotice);
+    }
+    applySiteSettings();
+
     const unifiedXUrl = "https://x.com/PPSG87125194";
     const defaultComment = "코멘터리가 없습니다.";
 
