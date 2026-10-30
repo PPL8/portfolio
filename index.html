@@ -1340,7 +1340,7 @@
       const title = document.getElementById("siteHeroTitle");
       if (title && site.heroTitle) {
         title.replaceChildren();
-        site.heroTitle.split(/\\r?\\n/).forEach((line, index) => {
+        site.heroTitle.split(/\r?\n/).forEach((line, index) => {
           if (index) title.appendChild(document.createElement("br"));
           title.appendChild(document.createTextNode(line));
         });
