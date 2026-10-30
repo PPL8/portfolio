@@ -92,10 +92,10 @@ content:
         type: boolean
         default: true
       - name: order
-        label: 노출 순서
+        label: 노출 순서 (0이면 자동)
         type: number
         required: true
-        default: 100
+        default: 0
 
   - name: video
     label: Video
@@ -182,10 +182,10 @@ content:
         type: boolean
         default: true
       - name: order
-        label: 노출 순서
+        label: 노출 순서 (0이면 자동)
         type: number
         required: true
-        default: 100
+        default: 0
 
   - name: animation
     label: Animation
@@ -272,10 +272,10 @@ content:
         type: boolean
         default: true
       - name: order
-        label: 노출 순서
+        label: 노출 순서 (0이면 자동)
         type: number
         required: true
-        default: 100
+        default: 0
 
 settings:
   content:
