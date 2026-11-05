@@ -83,7 +83,20 @@ content:
         type: string
       - name: tools
         label: 사용 프로그램
-        type: string
+        type: select
+        options:
+          multiple: true
+          values:
+            - name: clip-studio
+              label: 클립 스튜디오
+            - name: photoshop
+              label: 포토샵
+            - name: capcut
+              label: 캡컷
+            - name: premiere-pro
+              label: 어도비 프리미어
+            - name: after-effects
+              label: 어도비 에프터이펙트
       - name: published
         label: 공개 여부
         type: boolean
@@ -174,7 +187,20 @@ content:
         type: string
       - name: tools
         label: 사용 프로그램
-        type: string
+        type: select
+        options:
+          multiple: true
+          values:
+            - name: clip-studio
+              label: 클립 스튜디오
+            - name: photoshop
+              label: 포토샵
+            - name: capcut
+              label: 캡컷
+            - name: premiere-pro
+              label: 어도비 프리미어
+            - name: after-effects
+              label: 어도비 에프터이펙트
       - name: published
         label: 공개 여부
         type: boolean
@@ -265,7 +291,20 @@ content:
         type: string
       - name: tools
         label: 사용 프로그램
-        type: string
+        type: select
+        options:
+          multiple: true
+          values:
+            - name: clip-studio
+              label: 클립 스튜디오
+            - name: photoshop
+              label: 포토샵
+            - name: capcut
+              label: 캡컷
+            - name: premiere-pro
+              label: 어도비 프리미어
+            - name: after-effects
+              label: 어도비 에프터이펙트
       - name: published
         label: 공개 여부
         type: boolean
