@@ -88,15 +88,15 @@ content:
           multiple: true
           values:
             - name: clip-studio
-              label: 클립 스튜디오
+              label: Clip Studio Paint
             - name: photoshop
-              label: 포토샵
+              label: Adobe Photoshop
             - name: capcut
-              label: 캡컷
+              label: CapCut
             - name: premiere-pro
-              label: 어도비 프리미어
+              label: Adobe Premiere Pro
             - name: after-effects
-              label: 어도비 에프터이펙트
+              label: Adobe After Effects
       - name: published
         label: 공개 여부
         type: boolean
@@ -192,15 +192,15 @@ content:
           multiple: true
           values:
             - name: clip-studio
-              label: 클립 스튜디오
+              label: Clip Studio Paint
             - name: photoshop
-              label: 포토샵
+              label: Adobe Photoshop
             - name: capcut
-              label: 캡컷
+              label: CapCut
             - name: premiere-pro
-              label: 어도비 프리미어
+              label: Adobe Premiere Pro
             - name: after-effects
-              label: 어도비 에프터이펙트
+              label: Adobe After Effects
       - name: published
         label: 공개 여부
         type: boolean
@@ -296,15 +296,15 @@ content:
           multiple: true
           values:
             - name: clip-studio
-              label: 클립 스튜디오
+              label: Clip Studio Paint
             - name: photoshop
-              label: 포토샵
+              label: Adobe Photoshop
             - name: capcut
-              label: 캡컷
+              label: CapCut
             - name: premiere-pro
-              label: 어도비 프리미어
+              label: Adobe Premiere Pro
             - name: after-effects
-              label: 어도비 에프터이펙트
+              label: Adobe After Effects
       - name: published
         label: 공개 여부
         type: boolean
