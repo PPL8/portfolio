@@ -10,5 +10,9 @@
   "xUrl": "https://x.com/PPSG87125194",
   "published": true,
   "featured": true,
-  "order": 0
+  "order": 0,
+  "duration": "4일",
+  "tools": [
+    "clip-studio"
+  ]
 }
